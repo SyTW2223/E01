@@ -1,10 +1,10 @@
 import { model, Schema } from "mongoose";
 
 import {UserInterface} from "./interfaces/user";
-import {SessionInterface} from "./interfaces/session";
+import { Session } from "./session";
 
 
-export const UserSchema = new Schema<UserInterface> ({
+const UserSchema = new Schema<UserInterface> ({
     name: {
         type: String,
         required: true,
@@ -19,7 +19,7 @@ export const UserSchema = new Schema<UserInterface> ({
     },
     sessions: [
         {
-            type: SessionInterface[],
+            type: Session[],
             required: false,
             unique: false,
             trim: true,
