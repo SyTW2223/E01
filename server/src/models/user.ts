@@ -1,7 +1,7 @@
 import { model, Schema } from "mongoose";
 
 import {UserInterface} from "./interfaces/user";
-import { Session } from "./session";
+
 
 
 const UserSchema = new Schema<UserInterface> ({
@@ -19,7 +19,7 @@ const UserSchema = new Schema<UserInterface> ({
     },
     sessions: [
         {
-            type: Session[],
+            type: Schema.Types.ObjectId, ref: 'Session',
             required: false,
             unique: false,
             trim: true,
