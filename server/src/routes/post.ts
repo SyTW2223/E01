@@ -15,11 +15,18 @@ postRouter.post('/user', (req, res) => {
         password: req.body.password,
         sessions: [],
     });
-    user.save().then((user) => {
-        res.status(201).send(user);
-    }).catch((error) => {
-        res.status(400).send(error);
-    });
+    User.findOne({ name: req.body.name})
+    .then((result) => {
+      if (result) {
+        res.status(404).json({ message: "User already exist." });
+      } else {
+        user.save().then((user) => {
+          res.status(201).send(user);
+        }).catch((error) => {
+            res.status(400).send(error);
+        });
+      }
+    })
 });
 
 postRouter.post('/session', (req, res) => {
