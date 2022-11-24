@@ -1,10 +1,19 @@
 import * as express from 'express';
 import './db/mongoose';
+// import { defaultRouter } from './routes.ts/default';
+import { postRouter } from './routes.ts/post';
 
 const app = express();
 app.use(express.json());
+app.use(postRouter);
 
-const port = process.env.PORT || 3000;
+// app.use(defaultRouter);
+
+const port = 4000;
+
+app.get("/", (_req, res) => {
+  res.send("Hello");
+});
 
 app.listen(port, () => {
   console.log(`Server is up on port ${port}`);

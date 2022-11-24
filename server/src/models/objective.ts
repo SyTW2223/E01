@@ -5,6 +5,7 @@ import { ObjectiveInterface } from "./interfaces/objective";
 const ObjectiveSchema = new Schema<ObjectiveInterface>({
   name: {
     type: String,
+    required: true,
     trim: true
   },
   tasks: [

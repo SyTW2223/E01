@@ -1,18 +1,20 @@
 import { model, Schema } from "mongoose";
 import { SessionInterface } from "./interfaces/session";
-import { User } from "./user";
 
 const SessionSchema = new Schema<SessionInterface>({
   id: {
     type: String,
+    required: true,
     trim: true
   },
   user: {
-    type: User,
+    type: Schema.Types.ObjectId, ref: 'User',
+    required: true,
     trim: true
   },
   time: {
     type: Date,
+    required: true,
     trim: true
   },
   objetives: [{
