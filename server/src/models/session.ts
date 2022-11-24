@@ -1,6 +1,5 @@
 import { model, Schema } from "mongoose";
 import { SessionInterface } from "./interfaces/session";
-import { Objetive } from "./objetive";
 import { User } from "./user";
 
 const SessionSchema = new Schema<SessionInterface>({
@@ -17,7 +16,7 @@ const SessionSchema = new Schema<SessionInterface>({
     trim: true
   },
   objetives: [{
-    type: Objetive,
+    type: Schema.Types.ObjectId, ref: 'Objective',
     trim: true
   }]
 });
