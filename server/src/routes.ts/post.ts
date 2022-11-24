@@ -8,7 +8,7 @@ import {Objective} from '../models/objective';
  */
 export const postRouter = express.Router();
 
-postRouter.post('/users', (req, res) => {
+postRouter.post('/user', (req, res) => {
     const user = new User({
         name: req.body.name,
         password: req.body.password,
@@ -22,6 +22,11 @@ postRouter.post('/users', (req, res) => {
 });
 
 postRouter.post('/session', (req, res) => {
+    if (!req.body.user) {
+        res.status(400).send({
+            error: "The user must exist"
+        })
+    }
     const session = new Session({
         id: req.body.id,
         user: req.body.user,
@@ -36,6 +41,11 @@ postRouter.post('/session', (req, res) => {
 });
 
 postRouter.post('/objective', (req, res) => {
+    if (!req.body.session) {
+        res.status(400).send({
+            error: "The session must exist"
+        })
+    }
     const objective = new Objective({
         name: req.body.name,
         tasks: [],        
