@@ -1,5 +1,5 @@
 import { model, Schema } from "mongoose";
-import { ObjetiveInterface } from "./interfaces/objetive";
+import { ObjetiveInterface } from "./interfaces/objective";
 
 
 const ObjetiveSchema = new Schema<ObjetiveInterface>({
