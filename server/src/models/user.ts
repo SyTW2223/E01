@@ -7,21 +7,19 @@ const UserSchema = new Schema<UserInterface> ({
         required: true,
         unique: true,
         trim: true,
-      },
+    },
     password: {
         type: String,
         required: true,
         unique: true,
         trim: true,
     },
-    sessions: [
-        {
-            type: Schema.Types.ObjectId, ref: 'Session',
-            required: false,
-            unique: false,
-            trim: true,
-        },
-    ],
+    sessions: [{        
+        type: Schema.Types.ObjectId, ref: 'Session',
+        required: false,
+        unique: false,
+        trim: true,
+    }]
 })
 
 export const User = model<UserInterface>('User', UserSchema);

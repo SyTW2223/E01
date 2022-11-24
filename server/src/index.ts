@@ -7,11 +7,6 @@ const app = express();
 app.use(express.json());
 app.use(postRouter);
 
-
-app.get("/", (_req, res) => {
-  res.send("Hello");
-});
-
 app.use(defaultRouter);
 
 const port = 4000;
