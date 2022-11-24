@@ -1,8 +1,8 @@
 import * as express from 'express';
 import './db/mongoose';
-import { defaultRouter } from './routes.ts/default';
-import { getRouter } from './routes.ts/get';
-import { postRouter } from './routes.ts/post';
+import { defaultRouter } from './routes/default';
+import { getRouter } from './routes/get';
+import { postRouter } from './routes/post';
 
 const app = express();
 app.use(express.json());
