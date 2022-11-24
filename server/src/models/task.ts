@@ -3,9 +3,13 @@ import {TaskInterface} from "./interfaces/task";
 
 const TaskSchema = new Schema<TaskInterface> ({
     name: {
-        type: String,
-        required: true,
-        trim: true,
+      type: String,
+      required: true,
+      trim: true,
+    }, 
+    objetive: {
+      type: Schema.Types.ObjectId, ref: 'Objective',
+      trim: true
     }
 })
 

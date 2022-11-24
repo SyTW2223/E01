@@ -2,6 +2,7 @@ import * as express from 'express';
 import {User} from '../models/user';
 import {Session} from '../models/session';
 import {Objective} from '../models/objective';
+import { Task } from '../models/task';
 
 /**
  * Contains all the functionality to store items in the database
@@ -52,6 +53,23 @@ postRouter.post('/objective', (req, res) => {
     });
     objective.save().then((objective) => {
         res.status(201).send(objective);
+    }).catch((error) => {
+        res.status(400).send(error);
+    });
+});
+
+postRouter.post('/task', (req, res) => {
+    if (!req.body.objective) {
+        res.status(400).send({
+            error: "The objetive must exist"
+        })
+    }
+    const task = new Task({
+        name: req.body.name,
+        objetive: req.body.objetive,        
+    });
+    task.save().then((task) => {
+        res.status(201).send(task);
     }).catch((error) => {
         res.status(400).send(error);
     });
