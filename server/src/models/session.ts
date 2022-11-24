@@ -17,7 +17,7 @@ const SessionSchema = new Schema<SessionInterface>({
     required: true,
     trim: true
   },
-  objetives: [{
+  objectives: [{
     type: Schema.Types.ObjectId, ref: 'Objective',
     trim: true
   }]

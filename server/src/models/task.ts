@@ -7,7 +7,7 @@ const TaskSchema = new Schema<TaskInterface> ({
       required: true,
       trim: true,
     }, 
-    objetive: {
+    objective: {
       type: Schema.Types.ObjectId, ref: 'Objective',
       trim: true
     }

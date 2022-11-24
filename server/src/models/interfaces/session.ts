@@ -8,5 +8,5 @@ export interface SessionInterface {
   id: string,
   user: UserInterface,
   time: Date,
-  objetives: ObjectiveInterface[]
+  objectives: ObjectiveInterface[]
 };
