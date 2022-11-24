@@ -16,7 +16,7 @@ const SessionSchema = new Schema<SessionInterface>({
     trim: true
   },
   objetives: [{
-    type: Schema.Types.ObjectId, ref: 'Objetive',
+    type: Schema.Types.ObjectId, ref: 'Objective',
     trim: true
   }]
 });

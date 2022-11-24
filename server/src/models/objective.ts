@@ -1,8 +1,8 @@
 import { model, Schema } from "mongoose";
-import { ObjetiveInterface } from "./interfaces/objective";
+import { ObjectiveInterface } from "./interfaces/objective";
 
 
-const ObjetiveSchema = new Schema<ObjetiveInterface>({
+const ObjectiveSchema = new Schema<ObjectiveInterface>({
   name: {
     type: String,
     trim: true
@@ -15,4 +15,4 @@ const ObjetiveSchema = new Schema<ObjetiveInterface>({
   ]
 });
 
-export const Objetive = model<ObjetiveInterface>('Objetive', ObjetiveSchema);
+export const Objective = model<ObjectiveInterface>('Objective', ObjectiveSchema);

@@ -1,7 +1,7 @@
 import * as express from 'express';
 import {User} from '../models/user';
 import {Session} from '../models/session';
-import {Objetive} from '../models/objetive';
+import {Objective} from '../models/objective';
 
 /**
  * Contains all the functionality to store items in the database
@@ -36,7 +36,7 @@ postRouter.post('/session', (req, res) => {
 });
 
 postRouter.post('/objective', (req, res) => {
-    const objective = new Objetive({
+    const objective = new Objective({
         name: req.body.name,
         tasks: [],        
     });
