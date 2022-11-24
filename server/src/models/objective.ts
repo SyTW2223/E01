@@ -9,8 +9,8 @@ const ObjectiveSchema = new Schema<ObjectiveInterface>({
     trim: true
   },
   tasks: [{
-      type: Schema.Types.ObjectId, ref: 'Task',
-      trim: true
+    type: Schema.Types.ObjectId, ref: 'Task',
+    trim: true
   }]
 });
 

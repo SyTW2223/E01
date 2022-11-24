@@ -23,7 +23,7 @@ postRouter.post('/user', (req, res) => {
 
 postRouter.post('/session', (req, res) => {
     if (!req.body.user) {
-        res.status(400).send({
+        res.status(400).send ({
             error: "The user must exist"
         })
     }

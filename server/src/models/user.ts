@@ -7,7 +7,7 @@ const UserSchema = new Schema<UserInterface> ({
         required: true,
         unique: true,
         trim: true,
-      },
+    },
     password: {
         type: String,
         required: true,
