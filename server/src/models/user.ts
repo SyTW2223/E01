@@ -14,14 +14,12 @@ const UserSchema = new Schema<UserInterface> ({
         unique: true,
         trim: true,
     },
-    sessions: [
-        {
-            type: Schema.Types.ObjectId, ref: 'Session',
-            required: false,
-            unique: false,
-            trim: true,
-        },
-    ],
+    sessions: [{        
+        type: Schema.Types.ObjectId, ref: 'Session',
+        required: false,
+        unique: false,
+        trim: true,
+    }]
 })
 
 export const User = model<UserInterface>('User', UserSchema);
