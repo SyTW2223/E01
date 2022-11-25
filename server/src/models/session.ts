@@ -14,7 +14,6 @@ const SessionSchema = new Schema<SessionInterface>({
   },
   time: {
     type: Date,
-    required: true,
     trim: true
   },
   objectives: [{
