@@ -24,7 +24,7 @@ deleteRouter.delete('/user', (req, res) => {
 });
 
 deleteRouter.delete('/session', (req, res) => {
-    Session.findOneAndDelete({ id: req.query.id as string })
+    Session.findOneAndDelete({ id: req.query.id as string, user: req.query.user as string})
     .then((result) => {
       if (result) {
         res.status(200).json(result);
