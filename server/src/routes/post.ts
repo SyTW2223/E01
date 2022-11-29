@@ -29,23 +29,37 @@ postRouter.post('/user', (req, res) => {
     })
 });
 
-postRouter.post('/session', (req, res) => {
+postRouter.post('/session', (req, res) => {   
     if (!req.body.user) {
         res.status(400).send ({
             error: "The user must exist"
         })
+    } else {
+        const session = new Session({
+            id: req.body.id,
+            user: req.body.user,
+            time: req.body.time,
+            objetives: [],        
+        });
+
+        User.findById(req.body.user).then((user) => {
+            if (user) {
+                user.sessions.push(session);
+                user.save().then(() => {
+                    res.status(201);
+                }).catch((error) => {
+                    res.status(500).send(error);
+                });
+            }
+            console.log(user);
+            session.save().then((session) => {
+                res.status(201).send(session);
+            }).catch((error) => {
+                res.status(400).send(error);
+            });
+        })
     }
-    const session = new Session({
-        id: req.body.id,
-        user: req.body.user,
-        time: req.body.time,
-        objetives: [],        
-    });
-    session.save().then((session) => {
-        res.status(201).send(session);
-    }).catch((error) => {
-        res.status(400).send(error);
-    });
+    
 });
 
 postRouter.post('/objective', (req, res) => {
@@ -54,14 +68,28 @@ postRouter.post('/objective', (req, res) => {
             error: "The session must exist"
         })
     }
+    
     const objective = new Objective({
         name: req.body.name,
+        session: req.body.session,
         tasks: [],        
     });
-    objective.save().then((objective) => {
-        res.status(201).send(objective);
-    }).catch((error) => {
-        res.status(400).send(error);
+    
+    Session.findById(req.body.session).then((session) => {
+        if (session) {
+            session.objectives.push(objective);
+            session.save().then(() => {
+                res.status(201);
+            }).catch((error) => {
+                res.status(500).send(error);
+            });
+        }
+        console.log(session);
+        objective.save().then((objective) => {
+            res.status(201).send(objective);
+        }).catch((error) => {
+            res.status(400).send(error);
+        });
     });
 });
 
@@ -74,6 +102,23 @@ postRouter.post('/task', (req, res) => {
     const task = new Task({
         name: req.body.name,
         objetive: req.body.objetive,        
+    });
+
+    Objective.findById(req.body.objective).then((objective) => {
+        if (objective) {
+            objective.tasks.push(task);
+            objective.save().then(() => {
+                res.status(201);
+            }).catch((error) => {
+                res.status(500).send(error);
+            });
+        }
+        console.log(objective);
+        task.save().then((task) => {
+            res.status(201).send(task);
+        }).catch((error) => {
+            res.status(400).send(error);
+        });
     });
     task.save().then((task) => {
         res.status(201).send(task);

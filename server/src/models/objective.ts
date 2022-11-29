@@ -8,6 +8,11 @@ const ObjectiveSchema = new Schema<ObjectiveInterface>({
     required: true,
     trim: true
   },
+  session: {
+    type: Schema.Types.ObjectId, ref: 'Session',
+    required: true,
+    trim: true
+  },
   tasks: [{
     type: Schema.Types.ObjectId, ref: 'Task',
     trim: true
