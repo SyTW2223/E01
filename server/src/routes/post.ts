@@ -41,7 +41,6 @@ postRouter.post('/session', (req, res) => {
             time: req.body.time,
             objetives: [],        
         });
-
         User.findById(req.body.user).then((user) => {
             if (user) {
                 user.sessions.push(session);
@@ -51,7 +50,6 @@ postRouter.post('/session', (req, res) => {
                     res.status(500).send(error);
                 });
             }
-            console.log(user);
             session.save().then((session) => {
                 res.status(201).send(session);
             }).catch((error) => {
@@ -84,7 +82,6 @@ postRouter.post('/objective', (req, res) => {
                 res.status(500).send(error);
             });
         }
-        console.log(session);
         objective.save().then((objective) => {
             res.status(201).send(objective);
         }).catch((error) => {
@@ -96,12 +93,12 @@ postRouter.post('/objective', (req, res) => {
 postRouter.post('/task', (req, res) => {
     if (!req.body.objective) {
         res.status(400).send({
-            error: "The objetive must exist"
+            error: "The objective must exist"
         })
     }
     const task = new Task({
         name: req.body.name,
-        objetive: req.body.objetive,        
+        objective: req.body.objective,        
     });
 
     Objective.findById(req.body.objective).then((objective) => {
@@ -113,16 +110,10 @@ postRouter.post('/task', (req, res) => {
                 res.status(500).send(error);
             });
         }
-        console.log(objective);
         task.save().then((task) => {
             res.status(201).send(task);
         }).catch((error) => {
             res.status(400).send(error);
         });
-    });
-    task.save().then((task) => {
-        res.status(201).send(task);
-    }).catch((error) => {
-        res.status(400).send(error);
     });
 });
