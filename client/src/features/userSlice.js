@@ -7,11 +7,14 @@ export const userSlice = createSlice ({
   },
   reducers:{
     login: (state , action) => {
+      const { user, token } = action.payload;
       // payload es el nuevo dato con el que actualizamos el estado
-      state.user = action.payload;
+      state.user = user;
+      state.token = token;
     },
     logout: (state) => {
       state.user = null;
+      state.loggedIn = false;
     }
   }
 });

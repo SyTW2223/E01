@@ -1,14 +1,21 @@
-import './App.css'
-import Login from './components/Login'
-import { selectUser } from './features/userSlice'
-import { useSelector } from 'react-redux';
+import Login from './components/Login';
+import Home from './components/Home';
+import { Route, Routes } from 'react-router-dom';
+import PrivateRoute from './components/PrivateRoute';
+import './App.css';
 
 export default function App() {
-  const currentUser = useSelector(selectUser);
 
   return (
     <div>
-      <Login/>
+      <Routes>
+        <Route path='/' element={
+                <PrivateRoute>
+                    <Home />
+                </PrivateRoute>
+              }/>
+        <Route path='/login' element={<Login />} />
+      </Routes>
     </div>
   )
 };
