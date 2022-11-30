@@ -20,7 +20,7 @@ getRouter.get('/user', (req, res) => {
 });
 
 getRouter.get('/session', (req, res) => {
-  const filter = req.query.id?{id: req.query.id.toString()}:{};
+  const filter = req.query.name?{id: req.query.name.toString()}:{};
   Session.find(filter).then((session) => {
     if (session.length !== 0) {
       res.send(session);
