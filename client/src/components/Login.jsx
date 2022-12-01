@@ -7,30 +7,28 @@ import { Link } from "react-router-dom";
 const Login = () => {
   const [userName, setUserName] = useState('');
   const [userPwd, setUserPwd] = useState('');
-
   const dispatch = useDispatch();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (userName === '' || userPwd === '')
+    if (userName === '' || userPwd === '') {
+
       alert("Porfavor rellene los campos de usuario y contraseñas.");
-    else {
+    } else {
       fetch(`http://localhost:4000/user?name=${userName}&password=${userPwd}`, {
         method: 'GET'
       })
       .then((result) => result.json()).then( json => {
-        console.log(json.user);
+        if (json.user[0].password === userPwd) {
+          dispatch(login({
+            userName: userName,
+            userPwd: userPwd,
+            loggedIn: true
+          }))
+        } else {
+          alert("Contraseña inválida.");
+        }
       })        
-/*          if (result.user.password === userPwd) {
-            dispatch(login({
-              userName: userName,
-              userPwd: userPwd,
-              loggedIn: true
-            }))
-          } else {
-            alert("Contraseña inválida.");
-          }
-*/
       .catch((err) => console.log(err) );
     }
 
