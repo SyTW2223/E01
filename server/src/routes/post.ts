@@ -18,7 +18,7 @@ postRouter.post('/user', (req, res) => {
     User.findOne({ name: req.body.name})
     .then((result) => {
       if (result) {
-        res.status(404).json({ message: "User already exist." });
+        res.status(404).json({message: "User alredy exist", status: 404})
       } else {
         user.save().then((user) => {
           res.status(201).send(user);
@@ -36,7 +36,7 @@ postRouter.post('/session', (req, res) => {
         })
     } else {
         const session = new Session({
-            id: req.body.id,
+            name: req.body.name,
             user: req.body.user,
             time: req.body.time,
             objetives: [],        
@@ -74,14 +74,12 @@ postRouter.post('/objective', (req, res) => {
     });
     
     Session.findById(req.body.session).then((session) => {
-        if (session) {
-            session.objectives.push(objective);
-            session.save().then(() => {
-                res.status(201);
-            }).catch((error) => {
-                res.status(500).send(error);
-            });
-        }
+        session?.objectives.push(objective);
+        session?.save().then(() => {
+            res.status(201);
+        }).catch((error) => {
+            res.status(500).send(error);
+        });
         objective.save().then((objective) => {
             res.status(201).send(objective);
         }).catch((error) => {

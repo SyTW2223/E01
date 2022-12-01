@@ -43,7 +43,7 @@ deleteRouter.delete('/user', (req, res) => {
 });
 
 deleteRouter.delete('/session', (req, res) => {
-    Session.findOneAndDelete({ id: req.query.id as string, user: req.query.user as string})
+    Session.findOneAndDelete({ name: req.query.name as string, user: req.query.user as string})
     .then((each_session) => {
       each_session?.objectives.forEach((objective) => {
         let filter = objective.toString(); 
@@ -66,13 +66,15 @@ deleteRouter.delete('/session', (req, res) => {
 });
 
 deleteRouter.delete('/objective', (req, res) => {
-    Objective.findOneAndDelete({ id: req.query.name as string, session: req.query.session as string})
-    .then((result) => {
-      if (result) {
-        res.status(200).json(result);
-      } else {
-        res.status(404).json({ message: "Objective not Found" });
-      }
+    Objective.findOneAndDelete({ name: req.query.name as string, session: req.query.session as string})
+    .then((each_objectives) => {
+      each_objectives?.tasks.forEach((task) => {
+        let filter = task.toString(); 
+        Task.findByIdAndDelete(filter as string)
+        .then(() => {
+          res.status(200).send("Objectives and tasks deleted.");;
+        });
+      });
     })
     .catch((err) => {
       res.status(500).json({ error: err });
@@ -80,7 +82,7 @@ deleteRouter.delete('/objective', (req, res) => {
 });
 
 deleteRouter.delete('/task', (req, res) => {
-    Task.findOneAndDelete({ id: req.query.name as string })
+    Task.findOneAndDelete({ name: req.query.name as string })
     .then((result) => {
       if (result) {
         res.status(200).json(result);
