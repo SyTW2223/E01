@@ -2,6 +2,8 @@ import { useState } from 'react';
 import { login } from '../features/userSlice';
 import { useDispatch } from 'react-redux';
 
+
+
 const Login = () => {
   const [userName, setUserName] = useState('');
   const [userPwd, setUserPwd] = useState('');
@@ -9,6 +11,7 @@ const Login = () => {
   const dispatch = useDispatch();
 
   const handleSubmit = (e) => {
+    console.log(e);
     e.preventDefault();
 
     dispatch(login({
@@ -17,6 +20,20 @@ const Login = () => {
       loggedIn: true
     }))
   };
+
+  function logUser(username, pwd) {
+    fetch('http://localhost:4000/user', {
+      method: 'POST',
+      body: new URLSearchParams({
+        'name': username,
+        'password': pwd,
+      }),
+    })
+    .then((result) => {
+      
+    })
+    .catch((err) => console.log(err) );
+  }
   
   return (
     <div className='flex justify-center w-full h-screen items-center bg-white'>
@@ -33,21 +50,19 @@ const Login = () => {
           className='w-2/3 mb-4 text-gray-600 rounded bg-gray-100 h-[30px] pl-2' 
         />
         <input
-          type='text'
+          type='password'
           placeholder='password'
           value={userPwd}
           onChange={(e) => setUserPwd(e.target.value)}
           className='w-2/3 mb-4 text-gray-600 rounded bg-gray-100 h-[30px] pl-2'
         />
-        
         <div className='pt-4'>
-          <button 
-            type='submit'
+          <button
+            onClick={() => logUser(userName, userPwd)}
             className='bg-orange-400 text-white py-2 px-6 rounded hover:bg-orange-500 font-semibold
             duration-500'
           >Submit</button>
         </div>
-
       </form>
     </div>
   )
