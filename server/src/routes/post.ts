@@ -18,7 +18,7 @@ postRouter.post('/user', (req, res) => {
     User.findOne({ name: req.body.name})
     .then((result) => {
       if (result) {
-        res.status(404).json({ message: "User already exist." });
+        res.status(400).json({message: "User alredy exist", status: 400})
       } else {
         user.save().then((user) => {
           res.status(201).send(user);
