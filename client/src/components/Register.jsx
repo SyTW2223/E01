@@ -15,22 +15,24 @@ const Login = () => {
     if (userName === '' || userPwd === '')
       alert("Porfavor rellene los campos de usuario y contraseñas.");
     else {
-      fetch(`http://localhost:4000/user?name=${userName}&password=${userPwd}`, {
-        method: 'GET'
+      fetch('http://localhost:4000/user', {
+        method: 'POST',
+        body: new URLSearchParams({
+          'name': userName,
+          'password': userPwd,
+        }),
       })
-      .then((result) => result.json()).then( json => {
-        console.log(json.user);
-      })        
-/*          if (result.user.password === userPwd) {
+      .then((result) => {
+        if (result.status === 404) {
+          alert("El usuario ya existe, porfavor elija otro nombre de usuario.");
+        } else {
             dispatch(login({
               userName: userName,
               userPwd: userPwd,
               loggedIn: true
             }))
-          } else {
-            alert("Contraseña inválida.");
-          }
-*/
+        }
+      })
       .catch((err) => console.log(err) );
     }
 
@@ -41,7 +43,7 @@ const Login = () => {
       <form onSubmit={(e) => handleSubmit(e)} 
             className='flex flex-col items-center justify-center bg-purple-300 w-[600px] h-screen md:h-[450px] rounded-lg'>
         <h1 className='mb-10 font-extrabold text-3xl text-white'>
-          Sign Up!
+          Sign In!
         </h1>
         <input
           type='text'

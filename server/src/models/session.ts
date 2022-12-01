@@ -2,7 +2,7 @@ import { model, Schema } from "mongoose";
 import { SessionInterface } from "./interfaces/session";
 
 const SessionSchema = new Schema<SessionInterface>({
-  id: {
+  name: {
     type: String,
     required: true,
     trim: true
