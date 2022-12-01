@@ -2,6 +2,7 @@ import Login from './components/Login';
 import Home from './components/Home';
 import { Route, Routes } from 'react-router-dom';
 import PrivateRoute from './components/PrivateRoute';
+import Register from './components/Register';
 import './App.css';
 
 export default function App() {
@@ -15,6 +16,7 @@ export default function App() {
                 </PrivateRoute>
               }/>
         <Route path='/login' element={<Login />} />
+        <Route path='/register' element={<Register />} />
       </Routes>
     </div>
   )

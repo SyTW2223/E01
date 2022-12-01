@@ -1,13 +1,12 @@
 import { useState } from 'react';
 import { login } from '../features/userSlice';
 import { useDispatch } from 'react-redux';
-
-
+import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
   const [userName, setUserName] = useState('');
   const [userPwd, setUserPwd] = useState('');
-
+  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const handleSubmit = (e) => {
@@ -26,11 +25,12 @@ const Login = () => {
         if (result.status === 404) {
           alert("El usuario ya existe, porfavor elija otro nombre de usuario.");
         } else {
-            dispatch(login({
-              userName: userName,
-              userPwd: userPwd,
-              loggedIn: true
-            }))
+            // dispatch(login({
+            //   userName: userName,
+            //   userPwd: userPwd,
+            //   loggedIn: true
+            // }))
+            navigate("/login");
         }
       })
       .catch((err) => console.log(err) );

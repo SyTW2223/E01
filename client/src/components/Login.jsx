@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { login } from '../features/userSlice';
 import { useDispatch } from 'react-redux';
-
+import { Link } from "react-router-dom";
 
 
 const Login = () => {
@@ -63,6 +63,9 @@ const Login = () => {
             className='bg-orange-400 text-white py-2 px-6 rounded hover:bg-orange-500 font-semibold
             duration-500'
           >Submit</button>
+        </div>
+        <div className='text-slate-200 font-bold pt-8'>
+          <Link to="/register">¡Regístrate si no tienes cuenta!</Link>
         </div>
       </form>
     </div>
