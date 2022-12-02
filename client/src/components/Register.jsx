@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { Link } from "react-router-dom";
 
 const Login = () => {
   const [userName, setUserName] = useState('');
@@ -57,6 +58,9 @@ const Login = () => {
             className='bg-orange-400 text-white py-2 px-6 rounded hover:bg-orange-500 font-semibold
             duration-500'
           >Submit</button>
+        </div>
+        <div className='text-slate-200 font-bold pt-8'>
+          <Link to="/login">Volver al inicio de sesión.</Link>
         </div>
       </form>
     </div>
