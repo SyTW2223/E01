@@ -3,6 +3,7 @@ import {User} from '../models/user';
 import {Session} from '../models/session';
 import {Objective} from '../models/objective';
 import { Task } from '../models/task';
+import { generateToken } from './get';
 
 /**
  * Contains all the functionality to store items in the database
@@ -14,14 +15,15 @@ postRouter.post('/user', (req, res) => {
         name: req.body.name,
         password: req.body.password,
         sessions: [],
+        token: generateToken(req.body.password) as string,
     });
     User.findOne({ name: req.body.name})
     .then((result) => {
       if (result) {
         res.status(404).json({message: "User alredy exist", status: 404})
       } else {
-        user.save().then((user) => {
-          res.status(201).send(user);
+        user.save().then(() => {
+          res.status(201).send();
         }).catch((error) => {
             res.status(400).send(error);
         });
