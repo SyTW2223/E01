@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { login } from '../features/userSlice';
 import { useDispatch } from 'react-redux';
 import { Link } from "react-router-dom";
-
+// import { useJwt } from "react-jwt";
 
 const Login = () => {
   const [userName, setUserName] = useState('');
@@ -13,20 +13,22 @@ const Login = () => {
     e.preventDefault();
     if (userName === '' || userPwd === '') {
 
-      alert("Porfavor rellene los campos de usuario y contraseñas.");
+      alert("Porfavor rellene los campos de usuario y contraseña.");
     } else {
       fetch(`http://localhost:4000/user?name=${userName}&password=${userPwd}`, {
         method: 'GET'
       })
-      .then((result) => result.json()).then( json => {
-        if (json.user[0].password === userPwd) {
+      .then((result) => {
+        if (result.status === 201) {
           dispatch(login({
             userName: userName,
             userPwd: userPwd,
             loggedIn: true
           }))
+        } else if (result.status === 500) {
+          alert("No existe el usuario, registrese primero.")
         } else {
-          alert("Contraseña inválida.");
+          alert("Contraseña inválida.")
         }
       })        
       .catch((err) => console.log(err) );

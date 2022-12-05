@@ -5,5 +5,5 @@ import { ObjectiveInterface } from "./objective";
  */
 export interface TaskInterface {
   name: string,
-  objective: ObjectiveInterface
+  objective: ObjectiveInterface,
 };
