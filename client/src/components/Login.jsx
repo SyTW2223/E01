@@ -20,6 +20,7 @@ const Login = () => {
       })
       .then((result) => {
         if (result.status === 201) {
+          console.log(userName, userPwd)
           dispatch(login({
             userName: userName,
             userPwd: userPwd,

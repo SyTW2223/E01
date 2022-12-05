@@ -17,7 +17,7 @@ getRouter.get('/user', (req, res) => {
   const filter = req.query.name?{name: req.query.name.toString()}:{};
   User.find(filter).then((user) => {
       if ( generateToken(user[0].password)===  generateToken(req.query.password as string)) {
-        res.status(201).send({status: 201, id: user[0]._id});
+        res.status(201).send({status: 201});
       } else {
         res.status(500).send();
       } 
