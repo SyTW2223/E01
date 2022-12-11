@@ -1,3 +1,4 @@
 module.exports = {
-  "testEnvironment": "jsdom"
+  "testEnvironment": "jsdom",
+  "resetMocks": false
 }

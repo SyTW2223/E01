@@ -1,4 +1,4 @@
-import { afterEach, beforeEach, expect } from '@jest/globals';
+import { afterEach, beforeEach, expect, it } from '@jest/globals';
 import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import Login from "../components/Login";
@@ -8,6 +8,7 @@ import {cleanup, render, screen} from './test-utils'
 describe('Login component Tests', () => {
   // Renders the necesary stuff
   beforeEach(() => {
+    mockHandler = jest.fn();
     render(<BrowserRouter><Login /></BrowserRouter>);
   });
 
