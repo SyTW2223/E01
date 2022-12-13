@@ -18,4 +18,4 @@ notifications:
       - secure: "sdfusdhfsdofguhdfgubdsifgudfbgs3453durghssecurestringidsuag34522irueg="
     on_success: always
 on:
-  branch: master
+  branch: main
