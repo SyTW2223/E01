@@ -17,5 +17,5 @@ notifications:
     rooms:
       - secure: "sdfusdhfsdofguhdfgubdsifgudfbgs3453durghssecurestringidsuag34522irueg="
     on_success: always
-on: push
+on: 
   branch: main

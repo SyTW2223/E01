@@ -2,7 +2,7 @@
   "exclude": [
     "node_modules",
     "./dist",
-    "./test"
+    "test"
   ],
   "compilerOptions": {
     "target": "ES2020",
