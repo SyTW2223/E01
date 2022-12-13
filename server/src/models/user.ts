@@ -22,6 +22,7 @@ const UserSchema = new Schema<UserInterface> ({
     }],
     token: {
         type: String,
+        requied: false
     }
 })
 

@@ -1,4 +1,4 @@
-import cors = require('cors');
+import * as cors from 'cors';
 import * as express from 'express';
 
 import './db/mongoose';
@@ -20,6 +20,8 @@ app.use(defaultRouter);
 
 const port = 4000;
 
-app.listen(port, () => {
+const server = app.listen(port, () => {
   console.log(`Server is up on port ${port}`);
 });
+
+module.exports = {app, server};
