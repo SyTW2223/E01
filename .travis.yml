@@ -12,5 +12,10 @@ deploy:
   skip_cleanup: true
   domain: <my_name_here>.surge.sh
   project: ./build/
+notifications:
+  slack:
+    rooms:
+      - secure: "sdfusdhfsdofguhdfgubdsifgudfbgs3453durghssecurestringidsuag34522irueg="
+    on_success: always
 on:
   branch: master
