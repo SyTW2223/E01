@@ -1,4 +1,4 @@
-import {SessionInterface} from "./session";
+import {SessionInterface} from "./sessionInterface";
 
 export interface UserInterface {
     name: string;

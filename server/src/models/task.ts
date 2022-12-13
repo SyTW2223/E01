@@ -1,5 +1,5 @@
 import { model, Schema } from "mongoose";
-import {TaskInterface} from "./interfaces/task";
+import {TaskInterface} from "./interfaces/taskInterface";
 
 const TaskSchema = new Schema<TaskInterface> ({
     name: {

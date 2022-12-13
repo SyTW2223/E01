@@ -1,5 +1,5 @@
-import {UserInterface} from './user';
-import {ObjectiveInterface} from './objective';
+import {UserInterface} from './userInterface';
+import {ObjectiveInterface} from './objectiveInterface';
 
 /**
  * This interface is where the Artist schema is based
