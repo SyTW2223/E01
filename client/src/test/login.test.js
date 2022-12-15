@@ -8,7 +8,6 @@ import {cleanup, render, screen} from './test-utils'
 describe('Login component Tests', () => {
   // Renders the necesary stuff
   beforeEach(() => {
-    mockHandler = jest.fn();
     render(<BrowserRouter><Login /></BrowserRouter>);
   });
 

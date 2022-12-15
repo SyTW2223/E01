@@ -19,7 +19,8 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "jest --detectOpenHandles --watch",
+    "test": "jest --detectOpenHandles",
+    "watch": "jest --detectOpenHandles --watch",
     "eject": "react-scripts eject"
   },
   "transform": {
