@@ -43,22 +43,23 @@ deleteRouter.delete('/user', (req, res) => {
 });
 
 deleteRouter.delete('/session', (req, res) => {
-    Session.findOneAndDelete({ name: req.query.name as string, user: req.query.user as string})
+    Session.findOneAndDelete({name: req.query.name as string, user: req.query.user as string})
     .then((each_session) => {
-      each_session?.objectives.forEach((objective) => {
-        let filter = objective.toString(); 
-        Objective.findByIdAndDelete(filter as string)
-        .then((each_objectives) => {
-          each_objectives?.tasks.forEach((task) => {
-            let filter = task.toString(); 
-            Task.findByIdAndDelete(filter as string)
-            .then(() => {
-              res.status(200);
+      if (each_session) {
+        each_session.objectives.forEach((objective) => {
+          let filter = objective.toString(); 
+          Objective.findByIdAndDelete(filter as string)
+          .then((each_objectives) => {
+            each_objectives?.tasks.forEach((task) => {
+              let filter = task.toString(); 
+              Task.findByIdAndDelete(filter as string);
             });
           });
         });
-      });
-      res.status(200).send("Session, session's objectives and tasks deleted.");
+        res.status(200).send("Session, session's objectives and tasks deleted.");
+      } else {
+        res.status(404).send();
+      }
     })      
     .catch((err) => {
       res.status(500).json({ error: err });
@@ -66,23 +67,26 @@ deleteRouter.delete('/session', (req, res) => {
 });
 
 deleteRouter.delete('/objective', (req, res) => {
-    Objective.findOneAndDelete({ name: req.query.name as string, session: req.query.session as string})
-    .then((each_objectives) => {
-      each_objectives?.tasks.forEach((task) => {
+  Objective.findOneAndDelete({name: req.query.name as string, session: req.query.session as string})
+  .then((each_objectives) => {
+    if (each_objectives) {
+      each_objectives.tasks.forEach((task) => {
         let filter = task.toString(); 
-        Task.findByIdAndDelete(filter as string)
-        .then(() => {
-          res.status(200).send("Objectives and tasks deleted.");;
-        });
+        Task.findByIdAndDelete(filter as string);
       });
-    })
+      res.status(200).send();
+    } else {
+      res.status(404).send();
+    }
+
+  })
     .catch((err) => {
       res.status(500).json({ error: err });
     });
 });
 
 deleteRouter.delete('/task', (req, res) => {
-    Task.findOneAndDelete({ name: req.query.name as string })
+    Task.findOneAndDelete({ name: req.query.name as string, objective: req.query.objective as string})
     .then((result) => {
       if (result) {
         res.status(200).json(result);
