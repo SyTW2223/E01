@@ -19,9 +19,7 @@ jobs:
         node-version: [14.x, 16.x, 18.x]
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
-    defaults:
-      run:
-        working-directory: ./client
+    
       
     env:
       CI: false
@@ -35,5 +33,4 @@ jobs:
         cache: 'npm'
         cache-dependency-path: ./client/package-lock.json
     - run: npm install
-    - run: npm run build --if-present
     - run: npm test
