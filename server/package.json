@@ -32,7 +32,8 @@
         "test": "test"
     },
     "scripts": {
-        "test": "NODE_ENV=test jest --detectOpenHandles --watch --silent",
+        "test": "NODE_ENV=test jest --detectOpenHandles --silent",
+        "watch": "NODE_ENV=test jest --detectOpenHandles --watch --silent",
         "start": "tsc-watch --onSuccess \"node dist/index.js\""
     },
     "jest": {

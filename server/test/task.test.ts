@@ -1,11 +1,12 @@
 import mongoose from 'mongoose';
 import * as supertest from 'supertest';
-import { describe, test, afterAll, beforeAll } from '@jest/globals';
+import { describe, test, afterAll, beforeAll, jest } from '@jest/globals';
 import { newTask } from './entidades';
 
 const {app, server} = require('../src/index');
 const api = supertest(app);
 
+jest.setTimeout(10000);
 
 beforeAll(() => {
 });
