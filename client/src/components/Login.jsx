@@ -9,33 +9,37 @@ const Login = () => {
   const [userPwd, setUserPwd] = useState('');
   const dispatch = useDispatch();
 
-  const handleSubmit = (e) => {
+  async function handleSubmit(e) {
     e.preventDefault();
-    if (userName === '' || userPwd === '') {
-
-      alert("Porfavor rellene los campos de usuario y contraseña.");
+    if (userName === "" || userPwd === "") {
+      alert("Por favor, rellene los campos de usuario y contraseña.");
     } else {
-      fetch(`http://localhost:4000/user?name=${userName}&password=${userPwd}`, {
-        method: 'GET'
-      })
-      .then((result) => {
-        if (result.status === 201) {
-          console.log(userName, userPwd)
+      try {
+        const options = { method: "POST", body: new URLSearchParams({
+          'name': userName,
+          'password': userPwd,
+        })};
+        const result = await fetch(`http://localhost:4000/user/login`, options);
+        if (result.status === 200) {
           dispatch(login({
             userName: userName,
             userPwd: userPwd,
-            loggedIn: true
-          }))
+            loggedIn: true,
+          }));
         } else if (result.status === 500) {
-          alert("No existe el usuario, registrese primero.")
+          throw new Error("No existe el usuario, registrese primero.");
         } else {
-          alert("Contraseña inválida.")
+          throw new Error("Error desconocido.");
         }
-      })        
-      .catch((err) => console.log(err) );
+      } catch (error) {
+        if (error.message === "No existe el usuario, registrese primero.") {
+          alert(error.message);
+        } else {
+          alert("Contraseña inválida.");
+        }
+      }
     }
-
-  };
+  }  
   
   return (
     <div className='flex justify-center w-full h-screen items-center bg-white'>

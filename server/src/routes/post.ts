@@ -10,92 +10,97 @@ import { generateToken } from './get';
  */
 export const postRouter = express.Router();
 
-postRouter.post('/user', (req, res) => {
-    const user = new User({
-        name: req.body.name,
-        password: req.body.password,
-        sessions: [],
-        token: generateToken(req.body.password) as string,
-    });
-    User.findOne({ name: req.body.name})
-    .then((result) => {
-      if (result) {
-        res.status(404).json({message: "User alredy exist", status: 404})
-      } else {
-        user.save().then(() => {
-          res.status(201).send();
-        }).catch((error) => {
-            res.status(400).send(error);
-        });
-      }
-    })
-});
 
-postRouter.post('/session', (req, res) => {   
+  postRouter.post('/user/login', async (req, res) => {
+    try {
+      const userExists = await User.findOne({ name: req.body.name });
+      if (userExists ) {
+        userExists.password === req.body.password? res.status(200).send() : res.status(400).send();
+      } else {
+        res.status(404).send();
+      }
+    } catch (error) {
+      res.status(500).send(error);
+    }
+  });
+
+  postRouter.post('/user', async (req, res) => {
+    try {
+      const userExists = await User.findOne({ name: req.body.name });
+      if (userExists) {
+        res.status(404).json({ message: "User alredy exist", status: 404 });
+      } else {
+        const user = new User({
+          name: req.body.name,
+          password: req.body.password,
+          sessions: [],
+          token: generateToken(req.body.password) as string,
+        });
+        await user.save();
+        res.status(201).send();
+      }
+    } catch (error) {
+      res.status(500).send(error);
+    }
+  });
+  
+
+  postRouter.post('/session', async (req, res) => {   
     const session = new Session({
         name: req.body.name,
         user: req.body.user,
         time: req.body.time,
         objetives: [],        
     });
-    User.findById(req.body.user).then((user) => {
+    try {
+        const user = await User.findById(req.body.user);
         if (user) {
             user.sessions.push(session);
-            user.save().then(() => {
-                res.status(201);
-            }).catch((error) => {
-                res.status(500).send(error);
-            });
+            await user.save();
+            res.status(201);
         }
-        session.save().then((session) => {
-            res.status(201).send(session);
-        }).catch((error) => {
-            res.status(400).send(error);
-        });
-    })
-});
+        await session.save();
+        res.status(201).send();
+    } catch (error) {
+        res.status(500).send(error);
+    }
+  });
 
-postRouter.post('/objective', (req, res) => {
+  postRouter.post('/objective', async (req, res) => {
     const objective = new Objective({
         name: req.body.name,
         session: req.body.session,
         tasks: [],        
     });
     
-    Session.findById(req.body.session).then((session) => {
+    try {
+        const session = await Session.findById(req.body.session);
         session?.objectives.push(objective);
-        session?.save().then(() => {
-            res.status(201);
-        }).catch((error) => {
-            res.status(500).send(error);
-        });
-        objective.save().then((objective) => {
-            res.status(201).send(objective);
-        }).catch((error) => {
-            res.status(400).send(error);
-        });
-    });
+        await session?.save();
+        res.status(201);
+        await objective.save();
+        res.status(201).send();
+    } catch (error) {
+        res.status(500).send(error);
+    }
 });
 
-postRouter.post('/task', (req, res) => {
+postRouter.post('/task', async (req, res) => {
     const task = new Task({
         name: req.body.name,
         objective: req.body.objective,        
     });
 
-    Objective.findById(req.body.objective).then((objective) => {
+    try {
+        const objective = await Objective.findById(req.body.objective);
         if (objective) {
             objective.tasks.push(task);
-            objective.save().then(() => {
-                res.status(201);
-            }).catch((error) => {
-                res.status(500).send(error);
-            });
+            await objective.save();
+            res.status(201);
         }
-        task.save().then((task) => {
-            res.status(201).send(task);
-        }).catch((error) => {
-            res.status(400).send(error);
-        });
-    });
+        await task.save();
+        res.status(201).send();
+    } catch (error) {
+        res.status(500).send(error);
+    }
 });

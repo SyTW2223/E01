@@ -38,7 +38,7 @@ describe('Session Model Test', () => {
     test('Should try to create a new session without any field', async () => {
       await api
         .post('/session')
-        .expect(400)
+        .expect(500)
     });
     
     test('Should try to get a unexistent session', async () => {
