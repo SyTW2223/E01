@@ -1,14 +1,13 @@
 import mongoose from 'mongoose';
 import * as supertest from 'supertest';
-import { describe, test, afterAll, beforeAll } from '@jest/globals';
+import { describe, test, afterAll, jest } from '@jest/globals';
 import { newObjective } from './entidades';
 
 const {app, server} = require('../src/index');
 const api = supertest(app);
 
 
-beforeAll(() => {
-});
+jest.setTimeout(10000);
 
 describe('Objecive Model Test', () => {
   describe('Objecive`s endpoint OK test', () => {
