@@ -3,7 +3,7 @@ import * as express from 'express';
 import { createSession, getSession, deleteSession } from "../controllers/sessionController";
 
 /**
- * Contains all the functionality to store items in the database
+ * Contains all the functionality of sessions
  */
 export const sessionRouter = express.Router();
 

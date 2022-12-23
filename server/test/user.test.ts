@@ -48,7 +48,7 @@ describe('Users Model Test', () => {
     test('Should try to get a user without any field', async () => {
       await api
       .get('/user')
-      .expect(500)
+      .expect(404)
     });
     test('Should try delete a unexistent user', async () => {
       await api
@@ -59,7 +59,7 @@ describe('Users Model Test', () => {
 
 });
 
-/** Cierro las conexiones */
+/** Closing connections */
 afterAll(() => {
   server.close();
   mongoose.connection.close();
