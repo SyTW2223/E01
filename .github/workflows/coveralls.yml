@@ -42,8 +42,9 @@ jobs:
         github-token: ${{ secrets.github_token }}
         path-to-lcov: ${{ github.workspace }}/${{ matrix.folder }}/coverage/lcov.info
         flag-name:  run-${{ matrix.folder }}
+        base-path: ${{ github.workspace }}/${{ matrix.folder }}
         parallel: true
-        
+
   finish:
     needs: test
     runs-on: ubuntu-latest
