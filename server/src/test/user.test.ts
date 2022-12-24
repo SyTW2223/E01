@@ -19,6 +19,12 @@ describe('Users Model Test', () => {
         .send(newUser)
         .expect(201)
     });
+    test('Should login a user', async () => {
+      await api
+        .post('/user/login')
+        .send(newUser)
+        .expect(200)
+    });
     test('Should get a user', async () => {
       await api
       .get('/user')
@@ -37,7 +43,7 @@ describe('Users Model Test', () => {
     test('Should try to post a user withou any field', async () => {
       await api
         .post('/user')
-        .expect(400)
+        .expect(500)
     });
     test('Should try to get a user without any field', async () => {
       await api

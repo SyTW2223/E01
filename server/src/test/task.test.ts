@@ -37,7 +37,7 @@ describe('Task Model Test', () => {
     test('Should try to post a task withou any field', async () => {
       await api
         .post('/task')
-        .expect(400)
+        .expect(500)
     });
     test('Should try to get a task without any field', async () => {
       await api

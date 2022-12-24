@@ -35,7 +35,7 @@ describe('Objecive Model Test', () => {
     test('Should try to post a objective withou any field', async () => {
       await api
         .post('/objective')
-        .expect(400)
+        .expect(500)
     });
     test('Should try to get a objective without any field', async () => {
       await api
