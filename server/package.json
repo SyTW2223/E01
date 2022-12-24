@@ -34,10 +34,10 @@
         "test": "test"
     },
     "scripts": {
-        "test": "NODE_ENV=test jest --detectOpenHandles --silent",
-        "watch": "NODE_ENV=test jest --detectOpenHandles --watch --silent",
+        "test": "jest --detectOpenHandles --silent",
+        "watch": "jest --detectOpenHandles --watch --silent",
         "start": "tsc-watch --onSuccess \"node dist/index.js\"",
-        "coverage": "npm test -- --coverage --watchAll"
+        "coverage": "npm test -- --coverage"
     },
     "jest": {
         "verbose": true,
