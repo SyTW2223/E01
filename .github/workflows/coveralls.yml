@@ -43,6 +43,7 @@ jobs:
         path-to-lcov: ${{ github.workspace }}/${{ matrix.folder }}/coverage/lcov.info
         flag-name:  run-${{ matrix.folder }}
         parallel: true
+        
   finish:
     needs: test
     runs-on: ubuntu-latest

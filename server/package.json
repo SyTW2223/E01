@@ -37,7 +37,7 @@
         "test": "NODE_ENV=test jest --detectOpenHandles --silent",
         "watch": "NODE_ENV=test jest --detectOpenHandles --watch --silent",
         "start": "tsc-watch --onSuccess \"node dist/index.js\"",
-        "coverage": "npm test -- --coverage"
+        "coverage": "npm test -- --coverage --watchAll"
     },
     "jest": {
         "verbose": true,
