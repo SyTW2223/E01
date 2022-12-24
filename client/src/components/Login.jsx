@@ -12,7 +12,6 @@ const Login = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (userName === '' || userPwd === '') {
-
       alert("Porfavor rellene los campos de usuario y contraseña.");
     } else {
       fetch(`http://localhost:4000/user?name=${userName}&password=${userPwd}`, {

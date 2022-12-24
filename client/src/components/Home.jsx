@@ -1,6 +1,7 @@
 import React from 'react'
 import { useDispatch } from 'react-redux';
 import { logout } from '../features/userSlice';
+import Navbar from './Navbar';
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -13,6 +14,7 @@ const Home = () => {
   
   return (
     <div className='flex justify-center flex-col items-center'>
+      <Navbar/>
       <h1>Home</h1>
       <button 
         onClick={(e) => handleClick(e)}
