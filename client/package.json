@@ -23,7 +23,7 @@
     "test": "jest --detectOpenHandles",
     "watch": "jest --detectOpenHandles --watch",
     "eject": "react-scripts eject",
-    "coverage": "npm test -- --coverage"
+    "coverage": "react-scripts test --coverage"
   },
   "transform": {
     "transform": {
