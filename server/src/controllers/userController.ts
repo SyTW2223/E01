@@ -4,6 +4,8 @@ import { Session } from "../models/session";
 import { Task } from "../models/task";
 import { User } from "../models/user";
 
+const bcrypt = require('bcrypt');
+
 /**
  * @method registerUser is a function used to register a new user in the application.
  * @param {any} req - The request object, which should contain a body with the following fields:
@@ -20,9 +22,11 @@ export const registerUser = async (req: any, res: any) => {
     if (userExists) {
       res.status(404).json({ message: "User alredy exist", status: 404 });
     } else {
+      const salt = await bcrypt.genSalt(10)
+      const hashedPassword = await bcrypt.hash(req.body.password, salt) 
       const user = new User({
         name: req.body.name,
-        password: req.body.password,
+        password: hashedPassword,
         sessions: [],
         token: generateToken(req.body.password) as string,
       });
@@ -49,7 +53,7 @@ export const loginUser = async (req: any, res: any) => {
   try {
     const userExists = await User.findOne({ name: req.body.name });
     if (userExists) {
-      userExists.password === req.body.password ? res.status(200).send() : res.status(400).send();
+      await bcrypt.compare(req.body.password, userExists.password) ? res.status(200).send() : res.status(400).send();
     } else {
       res.status(404).send();
     }

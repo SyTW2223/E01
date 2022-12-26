@@ -19,6 +19,12 @@ describe('Users Model Test', () => {
         .send(newUser)
         .expect(201)
     });
+    test('Should try to create a new user that alredy exist', async () => {
+      await api
+        .post('/user')
+        .send(newUser)
+        .expect(404)
+    });
     test('Should login a user', async () => {
       await api
         .post('/user/login')
@@ -40,10 +46,16 @@ describe('Users Model Test', () => {
   });
 
   describe('User`s endpoint BAD REQUEST test', () => {
-    test('Should try to post a user withou any field', async () => {
+    test('Should try to post a user without any field', async () => {
       await api
         .post('/user')
         .expect(500)
+    });
+    test('Should try to login a user that doesnt exist', async () => {
+      await api
+        .post('/user/login')
+        .send(newUser)
+        .expect(404)
     });
     test('Should try to get a user without any field', async () => {
       await api
