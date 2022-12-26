@@ -1,0 +1,56 @@
+name: Coveralls Integration
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        folder: 
+          - 'client'
+          - 'server'
+
+    defaults:
+      run:
+        working-directory: ./${{ matrix.folder }}
+      
+    env:
+      COVERALLS_PARALLEL: true
+    
+    steps:
+    - name: Cloning repo
+      uses: actions/checkout@v3
+    - name: Use Node.js 18.x
+      uses: actions/setup-node@v3
+      with:
+        node-version: 18.x
+        cache: 'npm'
+        cache-dependency-path: ./${{ matrix.folder }}/package-lock.json
+    - name: Installing dependencies
+      run: npm install
+    - name: Generating coverage information
+      run: npm run coverage
+    - name: Coveralls GitHub Action
+      uses: coverallsapp/github-action@master
+      with:
+        github-token: ${{ secrets.github_token }}
+        path-to-lcov: ${{ github.workspace }}/${{ matrix.folder }}/coverage/lcov.info
+        flag-name:  run-${{ matrix.folder }}
+        base-path: ${{ github.workspace }}/${{ matrix.folder }}
+        parallel: true
+
+  finish:
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+    - name: Coveralls Finished
+      uses: coverallsapp/github-action@master
+      with:
+        github-token: ${{ secrets.github_token }}
+        parallel-finished: true

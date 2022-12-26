@@ -3,7 +3,7 @@ import * as supertest from 'supertest';
 import { describe, test, afterAll, jest } from '@jest/globals';
 import { newObjective } from './entidades';
 
-const {app, server} = require('../src/index');
+const {app, server} = require('../index');
 const api = supertest(app);
 
 

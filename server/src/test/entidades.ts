@@ -1,7 +1,7 @@
-import { Session } from "../src/models/session";
-import { User } from "../src/models/user";
-import { Objective } from "../src/models/objective";
-import { Task } from "../src/models/task";
+import { Session } from "../models/session";
+import { User } from "../models/user";
+import { Objective } from "../models/objective";
+import { Task } from "../models/task";
 
 const user = new User({
   name: 'test',
