@@ -8,6 +8,7 @@ const user = new User({
   password: 'test'
 });
 
+
 const session = new Session({
   name: 'test session',
   user: user._id.toString()
