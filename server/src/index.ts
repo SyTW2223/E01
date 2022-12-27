@@ -8,12 +8,23 @@ import { objectiveRouter } from './routes/objectiveRoutes';
 import { sessionRouter } from './routes/sessionRoutes';
 import { taskRouter } from './routes/taskRoutes';
 import { userRouter } from './routes/userRoutes';
+var cookieParser = require('cookie-parser')
 
 const app = express();
+const corsOptions = {
+  origin: process.env.ORIGIN_DOMAIN,
+  methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+  allowedHeaders: "Content-Type, Origin",
+  optionSuccessStatus: 200,
+  credentials: true,
+};
 
+app.use(cors(corsOptions));
 app.use(express.json());
+
 app.use(express.urlencoded({extended:true}));
-app.use(cors())
+app.use(cookieParser());
+
 
 app.use("/", userRouter);
 app.use("/", sessionRouter);
