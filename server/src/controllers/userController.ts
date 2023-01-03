@@ -1,4 +1,4 @@
-import { generateToken } from "../authentication/generateToken";
+import { generateToken } from "../authentication/token";
 import { Objective } from "../models/objective";
 import { Session } from "../models/session";
 import { Task } from "../models/task";
@@ -53,7 +53,7 @@ export const loginUser = async (req: any, res: any) => {
   try {
     const userExists = await User.findOne({ name: req.body.name });
     if (userExists) {
-      await bcrypt.compare(req.body.password, userExists.password) ? res.status(200).send() : res.status(400).send();
+      await bcrypt.compare(req.body.password, userExists.password) ? res.status(200).send({token: generateToken(userExists._id.toString())}) : res.status(400).send();
     } else {
       res.status(404).send();
     }

@@ -20,10 +20,6 @@ const UserSchema = new Schema<UserInterface> ({
         unique: false,
         trim: true,
     }],
-    token: {
-        type: String,
-        requied: false
-    }
 })
 
 export const User = model<UserInterface>('User', UserSchema);

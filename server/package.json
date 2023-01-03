@@ -37,7 +37,7 @@
         "test": "test"
     },
     "scripts": {
-        "test": "jest --detectOpenHandles --silent",
+        "test": "jest --detectOpenHandles --verbose",
         "watch": "jest --detectOpenHandles --watch --silent",
         "start": "tsc-watch --onSuccess \"node dist/index.js\"",
         "coverage": "npm test -- --coverage"

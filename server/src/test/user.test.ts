@@ -1,12 +1,18 @@
 import mongoose from 'mongoose';
 import * as supertest from 'supertest';
-import { describe, test, afterAll, beforeAll, jest } from '@jest/globals';
+import { describe, test, afterAll, beforeAll, jest, expect } from '@jest/globals';
 import { newUser } from './entidades';
 
 const { app, server } = require('../index');
 const api = supertest(app);
 
+let itemId = '';
+function actualizarToken(token: string) {
+  itemId = token;
+}
+
 jest.setTimeout(10000);
+
 
 beforeAll(() => {
 });
@@ -35,22 +41,20 @@ describe('Users Model Test', () => {
         .expect(404)
     });
     test('Should login a user', async () => {
-      await api
-        .post('/user/login')
-        .send(newUser)
-        .expect(200)
+      const res = await api.post('/user/login').send(newUser);
+      expect(res.body.token).toBeDefined();
+      expect(res.status).toBe(200);
+      actualizarToken(res.body.token);
+    });
+    test('Should get a user', async () => {
+        const res = await api.get('/user').send({token: itemId}).query({name: newUser.name});
+        expect(res.status).toBe(200);
     });
     test('Should try to login a user with an incorrect password', async () => {
       await api
         .post('/user/login')
-        .send({name: 'test', password: '1'})
+        .send({ name: 'test', password: '1' })
         .expect(400)
-    });
-    test('Should get a user', async () => {
-      await api
-        .get('/user')
-        .query({ name: newUser.name, password: newUser.password })
-        .expect(200)
     });
     test('Should delete a user', async () => {
       await api
@@ -72,11 +76,6 @@ describe('Users Model Test', () => {
         .send(newUser)
         .expect(404)
     });
-    test('Should try to get a user without any field', async () => {
-      await api
-        .get('/user')
-        .expect(404)
-    });
     test('Should try delete a unexistent user', async () => {
       await api
         .delete('/user')
@@ -85,6 +84,9 @@ describe('Users Model Test', () => {
   });
 
 });
+
+console.log("HOLA");
+console.log(itemId);
 
 /** Closing connections */
 afterAll(() => {

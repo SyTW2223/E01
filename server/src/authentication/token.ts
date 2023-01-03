@@ -8,3 +8,7 @@ const jwt = require('jsonwebtoken');
 export const generateToken = (id: string) => {
   return jwt.sign( {id}, JWT_SECRET, {expiresIn: '30d'})
 }
+
+export const decodeToken = (token: any) => {
+  return jwt.verify(token, JWT_SECRET);
+}
