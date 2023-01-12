@@ -18,7 +18,7 @@ describe('Home component Tests', () => {
   
   describe('Rendering test for Home component', () => {
     it ('Should render', () => {
-      expect(screen.getByRole('heading')).toHaveTextContent(/home/i);
+      expect(screen.getByRole('heading')).toHaveTextContent("¡ Inicia una nueva sesión de estudio !");
     });
     
     it ('Should have a button', () => {

@@ -1,14 +1,8 @@
 import React from 'react'
-import { useDispatch } from 'react-redux';
 import { logout } from '../features/userSlice';
 import Navbar from './Navbar';
-import { useSelector } from 'react-redux';
-import { selectUser } from '../features/userSlice';
 
 const Home = () => {
-  const dispatch = useDispatch();
-  const user = useSelector(selectUser);
-  console.log(user.token) 
   /**
    * Function to handle the logout buttom
    */
