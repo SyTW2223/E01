@@ -85,9 +85,6 @@ describe('Users Model Test', () => {
 
 });
 
-console.log("HOLA");
-console.log(itemId);
-
 /** Closing connections */
 afterAll(() => {
   server.close();
