@@ -61,7 +61,7 @@ const Register = () => {
           >Submit</button>
         </div>
         <div className='text-slate-200 font-bold pt-8'>
-          <Link to="/login">Volver al inicio de sesión.</Link>
+          <Link to="/">Volver al inicio de sesión.</Link>
         </div>
       </form>
     </div>

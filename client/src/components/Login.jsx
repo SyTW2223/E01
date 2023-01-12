@@ -19,11 +19,13 @@ const Login = () => {
           'name': userName,
           'password': userPwd,
         })};
-        const result = await fetch(`http://localhost:4000/user/login`, options);
+        const result = await (await fetch(`http://localhost:4000/user/login`, options));
+        const token = await result.json();        
         if (result.status === 200) {
           dispatch(login({
             userName: userName,
             userPwd: userPwd,
+            token: token.token,
             loggedIn: true,
           }));
         } else if (result.status === 500) {

@@ -76,7 +76,7 @@ export const loginUser = async (req: any, res: any) => {
  */
 export const getUser = async (req: any, res: any) => {
   const filter = { name: req.query.name };
-  User.findOne(filter).then((user) => {
+  User.findOne(filter).select('-password').then((user) => {
     if (user) {
       res.status(200).send(user);
     } else {
