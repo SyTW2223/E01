@@ -1,8 +1,11 @@
 import React from 'react'
+import { useDispatch } from 'react-redux';
 import { logout } from '../features/userSlice';
 import Navbar from './Navbar';
 
 const Home = () => {
+  const dispatch = useDispatch();
+
   /**
    * Function to handle the logout buttom
    */
