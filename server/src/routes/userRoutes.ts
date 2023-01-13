@@ -10,4 +10,4 @@ export const userRouter = express.Router();
 userRouter.post('/user', registerUser);
 userRouter.post('/user/login', loginUser);
 userRouter.get('/user', authentication, getUser);
-userRouter.delete('/user', deleteUser);
+userRouter.delete('/user', authentication, deleteUser);

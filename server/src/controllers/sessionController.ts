@@ -27,14 +27,23 @@ export const createSession = async (req: any, res: any) => {
     objetives: [],
   });
   try {
-    const user = await User.findById(req.body.user);
+    const user = await User.findById(req.body.user.toString());
     if (user) {
       user.sessions.push(session);
-      await user.save();
-      res.status(201);
+      const userPromise = user.save();
+      const sessionPromise = session.save();
+      Promise.all([userPromise, sessionPromise])
+        .then(() => {
+          // ambos documentos han sido guardados con éxito
+          res.status(201).send();
+        })
+        .catch((error) => {
+          // alguno de los guardados ha fallado
+          res.status(500).send(error);
+        });      
+    } else {
+      res.status(404).send();
     }
-    await session.save();
-    res.status(201).send();
   } catch (error) {
     res.status(500).send(error);
   }

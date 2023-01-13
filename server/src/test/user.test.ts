@@ -13,8 +13,7 @@ function actualizarToken(token: string) {
 
 jest.setTimeout(10000);
 
-
-beforeAll(() => {
+beforeAll( async() => {
 });
 
 
@@ -53,14 +52,8 @@ describe('Users Model Test', () => {
     test('Should try to login a user with an incorrect password', async () => {
       await api
         .post('/user/login')
-        .send({ name: 'test', password: '1' })
+        .send({ name: 'test user', password: '1' })
         .expect(400)
-    });
-    test('Should delete a user', async () => {
-      await api
-        .delete('/user')
-        .query({ name: newUser.name })
-        .expect(200)
     });
   });
 
@@ -73,20 +66,29 @@ describe('Users Model Test', () => {
     test('Should try to login a user that doesnt exist', async () => {
       await api
         .post('/user/login')
-        .send(newUser)
+        .send({name: "non-existent", password: "non-existent"})
         .expect(404)
     });
     test('Should try delete a unexistent user', async () => {
       await api
         .delete('/user')
+        .send({token: itemId})
+        .query({name: "non-existent"})
         .expect(404)
+    });
+    test('Should delete a user', async () => {
+      await api
+        .delete('/user')
+        .send({token: itemId})
+        .query({ name: newUser.name })
+        .expect(200)
     });
   });
 
 });
 
 /** Closing connections */
-afterAll(() => {
+afterAll( async () => {
+  await mongoose.connection.close();
   server.close();
-  mongoose.connection.close();
 });

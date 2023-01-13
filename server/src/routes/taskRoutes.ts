@@ -1,4 +1,5 @@
 import * as express from 'express';
+import { authentication } from '../authentication/auth-token';
 
 import { createTask, getTask, deleteTask } from "../controllers/taskController";
 
@@ -7,6 +8,6 @@ import { createTask, getTask, deleteTask } from "../controllers/taskController";
  */
 export const taskRouter = express.Router();
 
-taskRouter.post('/task', createTask);
-taskRouter.get('/task', getTask);
-taskRouter.delete('/task', deleteTask);
+taskRouter.post('/task', authentication, createTask);
+taskRouter.get('/task', authentication, getTask);
+taskRouter.delete('/task', authentication, deleteTask);

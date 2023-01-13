@@ -1,5 +1,7 @@
-import { JWT_SECRET } from "../ENV"
 const jwt = require('jsonwebtoken');
+const config = require('../../config.js');
+
+const JWT_SECRET = config.JWT_SECRET
 /**
  * 
  * @param id Id to sign the token.

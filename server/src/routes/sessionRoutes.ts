@@ -1,4 +1,5 @@
 import * as express from 'express';
+import { authentication } from '../authentication/auth-token';
 
 import { createSession, getSession, deleteSession } from "../controllers/sessionController";
 
@@ -7,6 +8,6 @@ import { createSession, getSession, deleteSession } from "../controllers/session
  */
 export const sessionRouter = express.Router();
 
-sessionRouter.post('/session', createSession);
-sessionRouter.get('/session', getSession);
-sessionRouter.delete('/session', deleteSession);
+sessionRouter.post('/session', authentication, createSession);
+sessionRouter.get('/session', authentication, getSession);
+sessionRouter.delete('/session', authentication, deleteSession);

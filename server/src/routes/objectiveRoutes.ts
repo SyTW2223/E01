@@ -1,4 +1,5 @@
 import * as express from 'express';
+import { authentication } from '../authentication/auth-token';
 
 import { createObjective, getObjective, deleteObjective } from "../controllers/objectiveController";
 
@@ -7,6 +8,6 @@ import { createObjective, getObjective, deleteObjective } from "../controllers/o
  */
 export const objectiveRouter = express.Router();
 
-objectiveRouter.post('/objective', createObjective);
-objectiveRouter.get('/objective', getObjective);
-objectiveRouter.delete('/objective', deleteObjective);
+objectiveRouter.post('/objective', authentication, createObjective);
+objectiveRouter.get('/objective', authentication, getObjective);
+objectiveRouter.delete('/objective', authentication, deleteObjective);

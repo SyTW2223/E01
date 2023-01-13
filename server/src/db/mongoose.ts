@@ -1,11 +1,11 @@
-import {connect} from 'mongoose';
-import { URLDATABASE } from '../ENV';
+import mongoose from 'mongoose';
+const config = require('../../config.js');
 
-
+mongoose.set('strictQuery', false);
 /**
  * Connects to the Mongo server
  */
-connect(URLDATABASE).then(() => {
+mongoose.connect(config.URLDATABASE, {sslValidate: false}).then(() => {
   console.log('Connection to MongoDB server established');
 }).catch((error) => {
   console.log('Unnable to connect to MongoDB server');

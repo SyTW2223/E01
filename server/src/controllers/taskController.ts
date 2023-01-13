@@ -18,16 +18,24 @@ export const createTask = async (req: any, res: any) => {
     name: req.body.name,
     objective: req.body.objective,
   });
-
   try {
     const objective = await Objective.findById(req.body.objective);
     if (objective) {
       objective.tasks.push(task);
-      await objective.save();
-      res.status(201);
+      const objectivePromise = objective.save()
+      const taskPromise = task.save()
+      Promise.all([objectivePromise, taskPromise])
+      .then(() => {
+        // ambos documentos han sido guardados con éxito
+        res.status(201).send();
+      })
+      .catch((error) => {
+        // alguno de los guardados ha fallado
+        res.status(500).send(error);
+      });   
+    } else {
+      res.status(404).send();
     }
-    await task.save();
-    res.status(201).send();
   } catch (error) {
     res.status(500).send(error);
   }

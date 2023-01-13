@@ -23,11 +23,22 @@ export const createObjective = async (req: any, res: any) => {
 
   try {
     const session = await Session.findById(req.body.session);
-    session?.objectives.push(objective);
-    await session?.save();
-    res.status(201);
-    await objective.save();
-    res.status(201).send();
+    if (session) {
+      session.objectives.push(objective);
+      const sessionPromise = session.save()
+      const objectivePromise = objective.save()
+      Promise.all([sessionPromise, objectivePromise])
+        .then(() => {
+          // ambos documentos han sido guardados con éxito
+          res.status(201).send();
+        })
+        .catch((error) => {
+          // alguno de los guardados ha fallado
+          res.status(500).send(error);
+        });   
+    } else {
+      res.status(404).send();
+    }
   } catch (error) {
     res.status(500).send(error);
   }
