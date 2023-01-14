@@ -3,19 +3,22 @@ import { useState } from 'react';
 import { login } from '../features/userSlice';
 import { useDispatch } from 'react-redux';
 import { Link } from "react-router-dom";
-import { makeStyles } from '@mui/material';
+import { ThemeProvider } from '@emotion/react';
+import {theme} from './theme'
+import Avatar from '@mui/material/Avatar';
+import Button from '@mui/material/Button';
+import CssBaseline from '@mui/material/CssBaseline';
+import TextField from '@mui/material/TextField';
+import Grid from '@mui/material/Grid';
+import Box from '@mui/material/Box';
+import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+import Typography from '@mui/material/Typography';
+import Container from '@mui/material/Container';
 
 const Login = () => {
   const [userName, setUserName] = useState('');
   const [userPwd, setUserPwd] = useState('');
   const dispatch = useDispatch();
-  
-  const useStyles = makeStyles((theme) => ({
-    button: {
-      backgroundColor: theme.palette.primary.main,
-      color: theme.palette.common.white,
-    },
-  }));
   
   async function handleSubmit(e) {
     e.preventDefault();
@@ -49,36 +52,70 @@ const Login = () => {
         }
       }
     }
-  } 
+  }  
   
   return (
-    <div>
-      <form onSubmit={(e) => handleSubmit(e)}>
-        <h1>
-          Sign Up!
-        </h1>
-        <input
-          type='text'
-          placeholder='user name'
-          value={userName}
-          onChange={(e) => setUserName(e.target.value)}
-        />
-        <input
-          type='password'
-          placeholder='password'
-          value={userPwd}
-          onChange={(e) => setUserPwd(e.target.value)}
-        />
-        <div className='pt-4'>
-          <button
-            type='submit'
-          >Submit</button>
-        </div>
-        <div>
-          <Link to="/register">¡Regístrate si no tienes cuenta!</Link>
-        </div>
-      </form>
-    </div>
+    <ThemeProvider theme={theme}>
+      <Container component="main" maxWidth="xs">
+        <CssBaseline />
+        <Box
+          sx={{
+            marginTop: 32,
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            bgcolor: theme.palette.background.default
+          }}
+        >
+          <Avatar sx={{ m: 1, bgcolor: 'primary.main' }}>
+            <LockOutlinedIcon />
+          </Avatar>
+          <Typography component="h1" variant="h5" sx={{}}>
+            Sign In
+          </Typography>
+          <Box component="form" onSubmit={handleSubmit} noValidate sx={{ m: 1 }}>
+            {/* User name input */}
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              id="username"
+              label="User Name"
+              name="User Name"
+              autoFocus
+              onChange={(e) => setUserName(e.target.value)}
+            />
+            {/*  Password input */}
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              name="password"
+              label="Password"
+              type="password"
+              id="password"
+              autoComplete="current-password"
+              onChange={(e) => setUserPwd(e.target.value)}
+            />
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              sx={{ mt: 3, mb: 2, bgcolor: 'secondary.main'}}              
+            >
+              Sign In
+            </Button>
+            <Grid container>
+              <Grid item>
+                <Link to='/register' variant="body2">
+                  {"¿No tienes cuenta? Regístrate."}
+                </Link>
+              </Grid>
+            </Grid>
+          </Box>
+        </Box>
+      </Container>
+    </ThemeProvider>
   )
 }
 

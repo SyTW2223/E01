@@ -2,10 +2,21 @@ import React from 'react';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Link } from "react-router-dom";
+import { ThemeProvider } from '@emotion/react';
+import {theme} from './theme'
+import Avatar from '@mui/material/Avatar';
+import Button from '@mui/material/Button';
+import CssBaseline from '@mui/material/CssBaseline';
+import TextField from '@mui/material/TextField';
+import Grid from '@mui/material/Grid';
+import Box from '@mui/material/Box';
+import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+import Typography from '@mui/material/Typography';
+import Container from '@mui/material/Container';
 
 const Register = () => {
-  const [registerUsername, setregisterUsername] = useState('');
-  const [registerPwd, setregisterPwd] = useState('');
+  const [registerUsername, setRegisterUsername] = useState('');
+  const [registerPwd, setRegisterPwd] = useState('');
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
@@ -33,38 +44,67 @@ const Register = () => {
   };
   
   return (
-    <div>
-      <form onSubmit={(e) => handleSubmit(e)}>
-        <h1>
-          Sign In!
-        </h1>
-        <input
-          type='text'
-          placeholder='user name'
-          value={registerUsername}
-          onChange={(e) => setregisterUsername(e.target.value)}
-        />
-        <input
-          type='password'
-          placeholder='password'
-          value={registerPwd}
-          onChange={(e) => setregisterPwd(e.target.value)}
-        />
-        <div>
-          <button
-            type='submit'
-          >Submit</button>
-        </div>
-<<<<<<< HEAD
-        <div>
-          <Link to="/login">Volver al inicio de sesión.</Link>
-=======
-        <div className='text-slate-200 font-bold pt-8'>
-          <Link to="/">Volver al inicio de sesión.</Link>
->>>>>>> ca7451f2f56fc6de2c7747a2df010f1c0de0dc84
-        </div>
-      </form>
-    </div>
+    <ThemeProvider theme={theme}>
+      <Container component="main" maxWidth="xs">
+        <CssBaseline />
+        <Box
+          sx={{
+            marginTop: 32,
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            bgcolor: theme.palette.background.default
+          }}
+        >
+          <Avatar sx={{ m: 1, bgcolor: 'primary.main' }}>
+            <LockOutlinedIcon />
+          </Avatar>
+          <Typography component="h1" variant="h5" sx={{}}>
+            Sign Up
+          </Typography>
+          <Box component="form" onSubmit={handleSubmit} noValidate sx={{ m: 1 }}>
+            {/* User Name Input */}
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              id="username"
+              label="User Name"
+              name="User Name"
+              autoFocus
+              onChange={(e) => setRegisterUsername(e.target.value)}
+            />
+            {/* User Password Input */}
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              name="password"
+              label="Password"
+              type="password"
+              id="password"
+              autoComplete="current-password"
+              onChange={(e) => setRegisterPwd(e.target.value)}
+            />
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              sx={{ mt: 3, mb: 2, bgcolor: 'secondary.main'}}              
+            >
+              Sign Up
+            </Button>
+            <Grid container>
+              <Grid item>
+                <Link to='/login' variant="body2">
+                  {"Vuelve al inicio de sesión"}
+                </Link>
+              </Grid>
+            </Grid>
+          </Box>
+        </Box>
+      </Container>
+    </ThemeProvider>
   )
 }
 
