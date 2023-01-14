@@ -40,12 +40,13 @@
     },
     "scripts": {
         "start": "tsc-watch --onSuccess \"cross-env NODE_ENV=development node dist/index.js\"",
-        "test": "cross-env NODE_ENV=production jest --detectOpenHandles --verbose",
+        "test": "cross-env NODE_ENV=production jest --testPathPattern post* --detectOpenHandles --verbose --silent && cross-env NODE_ENV=production jest --testPathPattern get* --detectOpenHandles --verbose --silent && cross-env NODE_ENV=production jest --testPathPattern delete* --detectOpenHandles --verbose --silent" ,
         "watch": "jest --detectOpenHandles --watch --silent",
         "coverage": "npm test -- --coverage"
     },
     "jest": {
         "verbose": true,
+        "testEnvironment": "node",
         "transform": {
             "^.+\\.(t|j)sx?$": "ts-jest"
         }
