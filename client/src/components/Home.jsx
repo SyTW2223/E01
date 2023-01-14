@@ -6,18 +6,22 @@ import React, { useState } from 'react';
 const Home = () => {
   const dispatch = useDispatch();
 
-  const handleClick = (e)  => {
+  /**
+   * Function to handle the logout buttom
+   */
+  const handleLogout = (e)  => {
     e.preventDefault();
-
     dispatch(logout());
   };
   
   return (
     <div>
       <Navbar/>
-      <h1>Home</h1>
+      <h1 className='uppercase text-2xl font-bold p-2'>¡ Inicia una nueva sesión de estudio !</h1>
       <button 
-        onClick={(e) => handleClick(e)}
+        onClick={(e) => handleLogout(e)}
+        className='bg-orange-400 text-white py-2 px-6 rounded hover:bg-orange-500 font-semibold
+        duration-500'
       > Logout </button>
     </div>
     

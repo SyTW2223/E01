@@ -1,15 +1,11 @@
-import {connect} from 'mongoose';
+import mongoose from 'mongoose';
+const config = require('../../config.js');
 
-/**
- * If the enviroment variable is not stablished connects to
- * the url
- */
-const mongodb_url = 'mongodb+srv://admin:usuario1@sytw-app.gamhgvw.mongodb.net/?retryWrites=true&w=majority';
-
+mongoose.set('strictQuery', false);
 /**
  * Connects to the Mongo server
  */
-connect(mongodb_url).then(() => {
+mongoose.connect(config.URLDATABASE, {sslValidate: false}).then(() => {
   console.log('Connection to MongoDB server established');
 }).catch((error) => {
   console.log('Unnable to connect to MongoDB server');

@@ -2,14 +2,18 @@ import { createSlice } from '@reduxjs/toolkit';
 
 export const userSlice = createSlice ({
   name: "user",
+  token: "token",
   initialState: {
-    user: null
+    user: null,
+    token: null
   },
   reducers:{
     login: (state , action) => {
       const user = action.payload;
+      const token = action.payload;
       // payload es el nuevo dato con el que actualizamos el estado
       state.user = user;
+      state.token = token;
     },
     logout: (state) => {
       state.user = null;

@@ -55,8 +55,13 @@ const Register = () => {
             type='submit'
           >Submit</button>
         </div>
+<<<<<<< HEAD
         <div>
           <Link to="/login">Volver al inicio de sesión.</Link>
+=======
+        <div className='text-slate-200 font-bold pt-8'>
+          <Link to="/">Volver al inicio de sesión.</Link>
+>>>>>>> ca7451f2f56fc6de2c7747a2df010f1c0de0dc84
         </div>
       </form>
     </div>

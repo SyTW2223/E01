@@ -1,5 +1,5 @@
 # Full Stack App
-### Nicolas Vega Rodríguez
+### Nicolas Vegas Rodríguez
 ### Juan Marrero Domínguez
 
 Test Cliente: [![React App Test - Client](https://github.com/SyTW2223/E01/actions/workflows/node.js.yml/badge.svg)](https://github.com/SyTW2223/E01/actions/workflows/node.js.yml)
