@@ -33,10 +33,9 @@ const Register = () => {
   };
   
   return (
-    <div className='flex justify-center w-full h-screen items-center bg-white'>
-      <form onSubmit={(e) => handleSubmit(e)} 
-            className='flex flex-col items-center justify-center bg-purple-300 w-[600px] h-screen md:h-[450px] rounded-lg'>
-        <h1 className='mb-10 font-extrabold text-3xl text-white'>
+    <div>
+      <form onSubmit={(e) => handleSubmit(e)}>
+        <h1>
           Sign In!
         </h1>
         <input
@@ -44,23 +43,19 @@ const Register = () => {
           placeholder='user name'
           value={registerUsername}
           onChange={(e) => setregisterUsername(e.target.value)}
-          className='w-2/3 mb-4 text-gray-600 rounded bg-gray-100 h-[30px] pl-2' 
         />
         <input
           type='password'
           placeholder='password'
           value={registerPwd}
           onChange={(e) => setregisterPwd(e.target.value)}
-          className='w-2/3 mb-4 text-gray-600 rounded bg-gray-100 h-[30px] pl-2'
         />
-        <div className='pt-4'>
+        <div>
           <button
             type='submit'
-            className='bg-orange-400 text-white py-2 px-6 rounded hover:bg-orange-500 font-semibold
-            duration-500'
           >Submit</button>
         </div>
-        <div className='text-slate-200 font-bold pt-8'>
+        <div>
           <Link to="/login">Volver al inicio de sesión.</Link>
         </div>
       </form>
