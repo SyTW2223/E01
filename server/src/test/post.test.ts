@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 import * as supertest from 'supertest';
 import { describe, test, afterAll, beforeAll, expect } from '@jest/globals';
-import { newSession, newUser } from './entidades';
+import { newObjective, newSession, newTask, newUser } from './entidades';
 import { decodeToken } from '../authentication/token'
 
 const { app, server } = require('../index');
@@ -18,7 +18,7 @@ afterAll(async () => {
 });
 
 describe('Post`s endpoint', () => {
-  describe('User`s endpoints', () => {
+  describe('Sucessful`s endpoints', () => {
     test('Should create a new user', async () => {
       await api.post('/user')
         .send(newUser).
@@ -35,6 +35,22 @@ describe('Post`s endpoint', () => {
       await api
         .post('/session')
         .send({token: token, ...newSession})
+        .expect(201)
+    });
+    test('Should create a new objective', async () => {
+      const res = await api.get('/session').send({token: token}).query({name: newSession.name, user: newSession.user.toString()})
+      newObjective.session = res.body[0]._id;    
+      await api
+        .post('/objective')
+        .send({ token: token, ...newObjective })
+        .expect(201)
+    });
+    test('Should create a new task', async () => {
+      const res = await api.get('/objective').send({ token: token}).query({name: newObjective.name,  session: newObjective.session.toString()}) 
+      newTask.objective = res.body[0]._id;
+      await api
+        .post('/task')
+        .send({ token: token, ...newTask })
         .expect(201)
     });
   });
