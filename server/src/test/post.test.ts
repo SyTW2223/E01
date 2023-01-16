@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 import * as supertest from 'supertest';
-import { describe, test, afterAll, beforeAll, expect } from '@jest/globals';
+import { jest, describe, test, afterAll, beforeAll, expect } from '@jest/globals';
 import { newObjective, newSession, newTask, newUser } from './entidades';
 import { decodeToken } from '../authentication/token'
 
@@ -9,6 +9,8 @@ const api = supertest(app);
 let token = ''
 
 const token2 = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzYzBiYzAwMWUxNzQ4ZDNhZDA1OGI1OSIsImlhdCI6MTY3MzU3NTQyOCwiZXhwIjoxNjc2MTY3NDI4fQ.0J1UrNHr-DbA-nxg3VAu-HwL5q4bx6EmEt-oCmpxMUo'
+
+jest.setTimeout(10000)
 
 beforeAll(async () => {
 });

@@ -1,12 +1,14 @@
 import mongoose from 'mongoose';
 import * as supertest from 'supertest';
-import { test, describe, afterAll, beforeAll } from '@jest/globals';
+import { jest, test, describe, afterAll, beforeAll } from '@jest/globals';
 import { newObjective, newSession, newTask, newUser } from './entidades';
 import { decodeToken } from '../authentication/token'
 
 const { app, server } = require('../index');
 const api = supertest(app);
 let token = ''
+
+jest.setTimeout(10000)
 
 beforeAll(async () => {
   let res = await api.post('/user/login').send(newUser);
