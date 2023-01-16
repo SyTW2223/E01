@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-const config = require('../../config.js');
+const config = require('../../config.ts');
 
 mongoose.set('strictQuery', false);
 /**
