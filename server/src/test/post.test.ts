@@ -8,6 +8,8 @@ const { app, server } = require('../index');
 const api = supertest(app);
 let token = ''
 
+const token2 = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzYzBiYzAwMWUxNzQ4ZDNhZDA1OGI1OSIsImlhdCI6MTY3MzU3NTQyOCwiZXhwIjoxNjc2MTY3NDI4fQ.0J1UrNHr-DbA-nxg3VAu-HwL5q4bx6EmEt-oCmpxMUo'
+
 beforeAll(async () => {
 });
 
@@ -34,19 +36,19 @@ describe('Post`s endpoint', () => {
     test('Should create a new session', async () => {
       await api
         .post('/session')
-        .send({token: token, ...newSession})
+        .send({ token: token, ...newSession })
         .expect(201)
     });
     test('Should create a new objective', async () => {
-      const res = await api.get('/session').send({token: token}).query({name: newSession.name, user: newSession.user.toString()})
-      newObjective.session = res.body[0]._id;    
+      const res = await api.get('/session').send({ token: token }).query({ name: newSession.name, user: newSession.user.toString() })
+      newObjective.session = res.body[0]._id;
       await api
         .post('/objective')
         .send({ token: token, ...newObjective })
         .expect(201)
     });
     test('Should create a new task', async () => {
-      const res = await api.get('/objective').send({ token: token}).query({name: newObjective.name,  session: newObjective.session.toString()}) 
+      const res = await api.get('/objective').send({ token: token }).query({ name: newObjective.name, session: newObjective.session.toString() })
       newTask.objective = res.body[0]._id;
       await api
         .post('/task')
@@ -54,4 +56,45 @@ describe('Post`s endpoint', () => {
         .expect(201)
     });
   });
+  describe('No token endpoints', () => {
+    test('Should try create a new session', async () => {
+      await api
+        .post('/session')
+        .send({ newSession })
+        .expect(404)
+    });
+    test('Should try create a new objective', async () => {
+      await api
+        .post('/objective')
+        .send({ newObjective })
+        .expect(404)
+    });
+    test('Should try create a new task', async () => {
+      await api
+        .post('/task')
+        .send({ newTask })
+        .expect(404)
+    });
+  });
+  describe('Unauthorized`s endpoints', () => {
+    test('Should try to create a new session without the correct token', async () => {
+      await api
+        .post('/session')
+        .send({ token: token2, ...newSession })
+        .expect(401)
+    });
+    test('Should try to create a new objective without the correct token', async () => {
+      await api
+        .post('/objective')
+        .send({ token: token2, ...newObjective })
+        .expect(401)
+    });
+    test('Should try to create a new task without the correct token', async () => {
+      await api
+        .post('/task')
+        .send({ token: token2, ...newTask })
+        .expect(401)
+    });
+  });
+
 });
