@@ -33,7 +33,7 @@ jobs:
         cache-dependency-path: ./server/package-lock.json
     - run: npm install
     - run: sudo npm install --global cross-env
-    - run: sudo npm install jest -g
+    - run: sudo npm install ts-jest -g
     - run: npm test
 
     env:
