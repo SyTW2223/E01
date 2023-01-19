@@ -23,12 +23,6 @@ jobs:
       run:
         working-directory: ./server
       
-    env:
-      CI: false
-      NODE_ENV: production
-      JWT_SECRET: abc123
-      URLDATABASE: mongodb+srv://admin:admin@cluster0.kousrlu.mongodb.net/test-app?retryWrites=true&w=majority
-    
     steps:
     - uses: actions/checkout@v3
     - name: Use Node.js ${{ matrix.node-version }}
@@ -38,6 +32,12 @@ jobs:
         cache: 'npm'
         cache-dependency-path: ./server/package-lock.json
     - run: npm install
-    - run: npm install cross-env
-    - run: npm run build --if-present
+    - run: npm install --save-dev cross-env
     - run: npm test
+
+    env:
+      CI: false
+      NODE_ENV: production
+      JWT_SECRET: abc123
+      URLDATABASE: mongodb+srv://admin:admin@cluster0.kousrlu.mongodb.net/test-app?retryWrites=true&w=majority
+    
