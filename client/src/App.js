@@ -3,6 +3,8 @@ import Home from './components/Home';
 import { Route, Routes } from 'react-router-dom';
 import PrivateRoute from './components/PrivateRoute';
 import Register from './components/Register';
+import { ThemeProvider } from '@emotion/react';
+import { theme } from './components/theme';
 
 export default function App() {
 
@@ -10,7 +12,9 @@ export default function App() {
     <Routes>
       <Route path='/' element={
               <PrivateRoute>
-                  <Home />
+                <ThemeProvider theme={theme}>
+                    <Home />
+                </ThemeProvider>
               </PrivateRoute>
             }/>
       <Route path='/login' element={<Login />} />

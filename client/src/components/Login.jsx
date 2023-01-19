@@ -103,7 +103,7 @@ const Login = () => {
               variant="contained"
               sx={{ mt: 3, 
                     mb: 2, 
-                    bgcolor: 'secondary.main',
+                    bgcolor: 'primary.main',
                     '&:hover': {
                       backgroundColor: 'secondary.secondary',
                     }

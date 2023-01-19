@@ -3,11 +3,12 @@ import { createTheme } from '@mui/material/styles';
 export const theme = createTheme({
   palette: {
     primary: {
-      main: '#ad7af0',
+      main: '#658864', // Verde fuerte
+      secondary: '#B7B78A', // Verde caqui
     },
     secondary: {
-      main: '#db9b2c',
-      secondary: '#ebb454'
+      main: '#DDDDDD',      // Gris
+      secondary: '#ABC270'  // lima claro
     },
     error: {
       main: '#e57373',

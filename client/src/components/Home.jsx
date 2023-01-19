@@ -5,6 +5,7 @@ import { ThemeProvider } from '@mui/material';
 import {theme} from './theme'
 import { Container } from '@mui/system';
 import SessionFrom from './form/SessionForm';
+import '../App.css';
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -18,38 +19,39 @@ const Home = () => {
   };
 
   return (
-    
     <ThemeProvider theme={theme}>
-      <Container component = 'main' maxWidth='lg'>
-      <Typography component='h1' variant="h3" align='center'>
-          ¡ Inicia una nueva sesión de estudio !
-      </Typography>
-        <Box sx= {{
-          border:'5px solid',
-          borderColor: 'secondary.main',
-          marginTop: 32,
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          bgcolor: 'white',
-          padding: 8 
-        }}>
-          <SessionFrom/>
-        </Box>
-        <Button
-          onClick={handleLogout}
-          variant="contained"
-          sx={{ mt: 3, 
-                mb: 2, 
-                bgcolor: 'secondary.main',
-                '&:hover': {
-                  backgroundColor: 'secondary.secondary',
-                }
-          }}              
+        <Container component = 'main' maxWidth='false'
         >
-          Logout
-        </Button>
-      </Container>
+        <Typography component='h1' variant="h3" align='center' 
+          sx={{
+            paddingTop: 8, 
+            fontFamily: 'Arial',
+            color: 'primary.main'}}
+          >
+            ¡ Inicia una nueva sesión de estudio !
+        </Typography>
+          <Box sx= {{
+            marginTop: 8,
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center'
+          }}>
+            <SessionFrom/>
+          </Box>
+          <Button
+            onClick={handleLogout}
+            variant="contained"
+            sx={{ mt: 3, 
+                  mb: 2, 
+                  bgcolor: 'primary.main',
+                  '&:hover': {
+                    backgroundColor: 'secondary.secondary',
+                  }
+            }}              
+          >
+            Logout
+          </Button>
+        </Container>
     </ThemeProvider>
   )
 }

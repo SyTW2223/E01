@@ -2,9 +2,12 @@ import React, { useState } from 'react';
 import { TextField,
          Button,
          Container,
-         Alert } from '@mui/material';
+         Alert, 
+         ThemeProvider} from '@mui/material';
 import ObjectiveForm from './ObjectiveForm';
 import { useDispatch } from 'react-redux';
+import DoneAllIcon from '@mui/icons-material/DoneAll';
+import { theme } from '../theme';
 
 const SessionFrom = () => {
   const [session, setSession] = useState('');
@@ -79,42 +82,73 @@ const SessionFrom = () => {
     setObjectives(newObjectives);
   }
 
-  return (
-    <Container>
-      {openAlert && <Alert severity="error" onClose={() => setAlert(false)}>¡Rellena <strong> TODOS </strong> los campos!</Alert>}
-      {openSuccess && <Alert severity="success" onClose={() => setSuccess(false)}>¡Todo ha ido perfecto!</Alert>}
-      {/* Session form */}
-      <TextField
-        required
-        label="Session Name"
-        value={session}
-        onChange={(event) => setSession(event.target.value)}
-      />
-      <Button onClick={handleAddObjective}>Add Objective</Button>
-      <Button onClick={(e) => { 
-        if (session.length === 0) {
-          setAlert(true)
-        } else {
-          handleCompleteSession(e)}
-      }}>
-          Complete Session
-        </Button>
-      
-      {/* Objetive Form */}
-      {objectives.map((objective, index) => (
-        <ObjectiveForm 
-          objective={objective}
-          objectiveIndex={index} 
-          handleTaskChange={handleTaskChange}
-          handleDeleteTask={handleDeleteTask}
-          handleObjectiveChange={handleObjectiveChange}
-          handleAddTask={handleAddTask}
-          handleCompleteObjective={handleCompleteObjective}
-          handleDeleteObjective={handleDeleteObjective}
-        />
-      ))}
+  const useStyles = {
+    bgcolor: theme.palette.primary.main,
+    boxShadow: 4,
+    borderRadius: 2
+  }
 
-    </Container>
+  return (
+    <ThemeProvider theme={theme}>      
+      <Container sx={useStyles}>
+        {openAlert && <Alert severity="error" onClose={() => setAlert(false)}>¡Rellena <strong> TODOS </strong> los campos!</Alert>}
+        {openSuccess && <Alert severity="success" onClose={() => setSuccess(false)}>¡Todo ha ido perfecto!</Alert>}
+        {/* Session form */}
+        <TextField
+          required
+          variant='filled'
+          label="Session Name"
+          fullWidth
+          value={session}
+          onChange={(event) => setSession(event.target.value)}
+          sx={{
+            bgcolor: 'primary.secondary',
+            marginTop: 2,
+            borderRadius: 1,
+            
+          }}
+        />
+        <Button onClick={handleAddObjective} sx={{bgcolor: 'primary.secondary', marginTop: 1, marginBottom: 1,
+          '&:hover': {
+            color: 'secondary.secondary',
+          }}}
+        >
+          Add</Button>
+        <Button 
+          sx={{
+            borderRadius: 5,
+            bgcolor: 'primary.secondary',
+            marginX: 2,
+            '&:hover': {
+              color: 'secondary.secondary',
+            }
+          }}
+          onClick={(e) => { 
+            if (session.length === 0) {
+              setAlert(true)
+            } else {
+              handleCompleteSession(e)}
+          }}
+        >
+          <DoneAllIcon/>
+        </Button>
+        
+        {/* Objetive Form */}
+        {objectives.map((objective, index) => (
+          <ObjectiveForm 
+            objective={objective}
+            objectiveIndex={index} 
+            handleTaskChange={handleTaskChange}
+            handleDeleteTask={handleDeleteTask}
+            handleObjectiveChange={handleObjectiveChange}
+            handleAddTask={handleAddTask}
+            handleCompleteObjective={handleCompleteObjective}
+            handleDeleteObjective={handleDeleteObjective}
+          />
+        ))}
+
+      </Container>
+    </ThemeProvider>
   );
 }
 
