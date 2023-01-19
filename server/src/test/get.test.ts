@@ -24,7 +24,7 @@ afterAll(async () => {
 
 describe('Get`s endpoint', () => {
   test('Should get a user', async () => {
-    const res = await api.get('/user').send({ token: token }).query({ name: newUser.name });
+    const res = await api.get('/user').query({token: token, name: newUser.name });
     expect(res.status).toBe(200);
   });
   test('Should get a session', async () => {
