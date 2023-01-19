@@ -8,7 +8,8 @@ import ObjectiveForm from './ObjectiveForm';
 import { useDispatch } from 'react-redux';
 import DoneAllIcon from '@mui/icons-material/DoneAll';
 import { theme } from '../theme';
-
+import { useSelector } from 'react-redux';
+import { selectUser } from '../../features/userSlice';
 
 const SessionFrom = () => {
   const [session, setSession] = useState('');

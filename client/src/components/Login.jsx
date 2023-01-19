@@ -99,7 +99,6 @@ const Login = () => {
               type="submit"
               fullWidth
               variant="contained"
-<<<<<<< HEAD
               sx={{ mt: 3, 
                     mb: 2, 
                     bgcolor: 'primary.main',
@@ -107,16 +106,6 @@ const Login = () => {
                       backgroundColor: 'secondary.secondary',
                     }
               }}              
-=======
-              sx={{
-                mt: 3,
-                mb: 2,
-                bgcolor: 'secondary.main',
-                '&:hover': {
-                  backgroundColor: 'secondary.secondary',
-                }
-              }}
->>>>>>> 878b9ec32b8cbcd200a4e679731cde2033683573
             >
               Sign In
             </Button>
