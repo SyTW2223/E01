@@ -1,5 +1,5 @@
-import { SessionInterface } from "./session"
-import { TaskInterface } from "./task"
+import { SessionInterface } from "./sessionInterface"
+import { TaskInterface } from "./taskInterface"
 
 /**
  * This interface is where the Artist schema is based

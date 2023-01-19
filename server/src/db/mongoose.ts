@@ -1,11 +1,10 @@
 import mongoose from 'mongoose';
-const config = require('../../config.js');
 
 mongoose.set('strictQuery', false);
 /**
  * Connects to the Mongo server
  */
-mongoose.connect(config.URLDATABASE, {sslValidate: false}).then(() => {
+mongoose.connect('mongodb+srv://admin:admin@cluster0.kousrlu.mongodb.net/test-app?retryWrites=true&w=majority', {sslValidate: false}).then(() => {
   console.log('Connection to MongoDB server established');
 }).catch((error) => {
   console.log('Unnable to connect to MongoDB server');
