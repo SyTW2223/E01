@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
-import { TextField, 
-         List, 
-         ListItem,
+import { TextField,
          Button,
-         Container } from '@mui/material';
+         Container} from '@mui/material';
+import ObjectiveForm from './ObjectiveForm';
 
 function SessionFrom() {
   const [session, setSession] = useState('');
@@ -31,7 +30,7 @@ function SessionFrom() {
     setObjectives(newObjectives);
   }
 
-  const handleCompleteSession = (index) => {
+  const handleCompleteSession = () => {
     setObjectives([]);
     setSession('');
   }
@@ -56,7 +55,6 @@ function SessionFrom() {
 
   return (
     <Container>
-      
       {/* Session form */}
       <TextField
         required
@@ -64,38 +62,21 @@ function SessionFrom() {
         value={session}
         onChange={(event) => setSession(event.target.value)}
       />
-      <Button onClick={() => handleCompleteSession()}>Complete Session</Button>
       <Button onClick={handleAddObjective}>Add Objective</Button>
+      <Button onClick={() => handleCompleteSession()}>Complete Session</Button>
       
       {/* Objetive Form */}
       {objectives.map((objective, index) => (
-        <Container key={index}>
-          <TextField
-            required
-            label="Objective"
-            value={objective.name}
-            onChange={(event) => handleObjectiveChange(event, index)}
-            disabled={objective.completed}
-          />
-          {!objective.completed && <Button onClick={() => handleAddTask(index)}>Add Task</Button>}
-          <Button onClick={() => handleCompleteObjective(index)} disabled={objective.completed}>Complete Objective</Button>
-          <Button onClick={() => handleDeleteObjective(index)}>Delete Objective</Button>
-          
-          {/* Task Form */}
-          <List>
-            {objective.tasks.map((task, taskIndex) => (
-              <ListItem key={taskIndex}>
-                <TextField
-                  required
-                  value={task}
-                  onChange={(event) => handleTaskChange(event, index, taskIndex)}
-                  disabled={objective.completed}
-                />
-                <Button onClick={() => handleDeleteTask(index, taskIndex)}>Delete Task</Button>
-              </ListItem>
-            ))}
-          </List>
-        </Container>
+        <ObjectiveForm 
+          objective={objective}
+          objectiveIndex={index} 
+          handleTaskChange={handleTaskChange}
+          handleDeleteTask={handleDeleteTask}
+          handleObjectiveChange={handleObjectiveChange}
+          handleAddTask={handleAddTask}
+          handleCompleteObjective={handleCompleteObjective}
+          handleDeleteObjective={handleDeleteObjective}
+        />
       ))}
 
     </Container>

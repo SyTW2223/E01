@@ -4,7 +4,7 @@ import { logout } from '../features/userSlice';
 import { ThemeProvider } from '@mui/material';
 import {theme} from './theme'
 import { Container } from '@mui/system';
-import SessionFrom from './SessionForm';
+import SessionFrom from './form/SessionForm';
 
 const Home = () => {
   const dispatch = useDispatch();
