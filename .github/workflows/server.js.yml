@@ -32,7 +32,7 @@ jobs:
         cache: 'npm'
         cache-dependency-path: ./server/package-lock.json
     - run: npm install
-    - run: npm install --save-dev cross-env
+    - run: sudo npm install --global cross-env
     - run: npm test
 
     env:
