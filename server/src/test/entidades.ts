@@ -2,7 +2,6 @@
  * @filename : entidades.ts
  * @description : In this file, entities are created to carry out the subsequent tests."
  */
-
 export const newUser = {
   name: "test user",
   password: "test user"

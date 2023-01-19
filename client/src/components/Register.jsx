@@ -102,7 +102,7 @@ const Register = () => {
             </Button>
             <Grid container>
               <Grid item>
-                <Link to='/login' variant="body2">
+                <Link to='/' variant="body2">
                   {"Vuelve al inicio de sesión"}
                 </Link>
               </Grid>

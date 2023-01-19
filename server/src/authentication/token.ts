@@ -1,7 +1,6 @@
 const jwt = require('jsonwebtoken');
-const config = require('../../config.js');
 
-const JWT_SECRET = config.JWT_SECRET
+const JWT_SECRET = 'abc123'
 /**
  * 
  * @param id Id to sign the token.

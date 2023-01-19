@@ -4,7 +4,7 @@ import { login } from '../features/userSlice';
 import { useDispatch } from 'react-redux';
 import { Link } from "react-router-dom";
 import { ThemeProvider } from '@emotion/react';
-import {theme} from './theme'
+import { theme } from './theme'
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -19,19 +19,21 @@ const Login = () => {
   const [userName, setUserName] = useState('');
   const [userPwd, setUserPwd] = useState('');
   const dispatch = useDispatch();
-  
+
   async function handleSubmit(e) {
     e.preventDefault();
     if (userName === "" || userPwd === "") {
       alert("Por favor, rellene los campos de usuario y contraseña.");
     } else {
       try {
-        const options = { method: "POST", body: new URLSearchParams({
-          'name': userName,
-          'password': userPwd,
-        })};
+        const options = {
+          method: "POST", body: new URLSearchParams({
+            'name': userName,
+            'password': userPwd,
+          })
+        };
         const result = await (await fetch(`http://localhost:4000/user/login`, options));
-        const token = await result.json();        
+        const token = await result.json();
         if (result.status === 200) {
           dispatch(login({
             userName: userName,
@@ -45,15 +47,11 @@ const Login = () => {
           throw new Error("Error desconocido.");
         }
       } catch (error) {
-        if (error.message === "No existe el usuario, registrese primero.") {
-          alert(error.message);
-        } else {
-          alert("Contraseña inválida.");
-        }
+        alert(error.message);
       }
     }
-  }  
-  
+  }
+
   return (
     <ThemeProvider theme={theme}>
       <Container component="main" maxWidth="xs">
@@ -101,6 +99,7 @@ const Login = () => {
               type="submit"
               fullWidth
               variant="contained"
+<<<<<<< HEAD
               sx={{ mt: 3, 
                     mb: 2, 
                     bgcolor: 'primary.main',
@@ -108,6 +107,16 @@ const Login = () => {
                       backgroundColor: 'secondary.secondary',
                     }
               }}              
+=======
+              sx={{
+                mt: 3,
+                mb: 2,
+                bgcolor: 'secondary.main',
+                '&:hover': {
+                  backgroundColor: 'secondary.secondary',
+                }
+              }}
+>>>>>>> 878b9ec32b8cbcd200a4e679731cde2033683573
             >
               Sign In
             </Button>

@@ -1,5 +1,5 @@
 import { model, Schema } from "mongoose";
-import { SessionInterface } from "./interfaces/session";
+import { SessionInterface } from "./interfaces/sessionInterface";
 
 const SessionSchema = new Schema<SessionInterface>({
   name: {
