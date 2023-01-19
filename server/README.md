@@ -9,6 +9,7 @@
 * Pruebas, creacion de entidades y como se maneja el JWT dentro de las pruebas, indicando con regex el orden de prueba de los ficheros.
 * Integracion continua con coveralls.
 * Despliegue
+* a
 ---
  
 
