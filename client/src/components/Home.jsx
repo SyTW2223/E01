@@ -6,6 +6,7 @@ import {theme} from './theme'
 import { Container } from '@mui/system';
 import SessionFrom from './form/SessionForm';
 import '../App.css';
+import { Link } from "react-router-dom";
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -50,6 +51,21 @@ const Home = () => {
             }}              
           >
             Logout
+          </Button>
+
+          <Button
+            variant="contained"
+            sx={{ mt: 3, 
+                  mb: 2, 
+                  bgcolor: 'primary.main',
+                  '&:hover': {
+                    backgroundColor: 'secondary.secondary',
+                  }
+            }}              
+          >
+            <Link to='/previous'>
+              {"Sesiones anteriores"}
+            </Link>
           </Button>
         </Container>
     </ThemeProvider>

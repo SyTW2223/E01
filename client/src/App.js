@@ -5,6 +5,7 @@ import PrivateRoute from './components/PrivateRoute';
 import Register from './components/Register';
 import { ThemeProvider } from '@emotion/react';
 import { theme } from './components/theme';
+import PreviousSession from './components/PreviousSession';
 
 export default function App() {
 
@@ -18,6 +19,7 @@ export default function App() {
               </PrivateRoute>
             }/>
       <Route path='/login' element={<Login />} />
+      <Route path='/previous' element={<PreviousSession />} />
       <Route path='/register' element={<Register />} />
     </Routes>
   )
