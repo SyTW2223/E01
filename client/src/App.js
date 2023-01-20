@@ -19,6 +19,7 @@ export default function App() {
               </PrivateRoute>
             }/>
       <Route path='/login' element={<Login />} />
+      <Route path='/home' element={<Home />} />
       <Route path='/previous' element={<PreviousSession />} />
       <Route path='/register' element={<Register />} />
     </Routes>

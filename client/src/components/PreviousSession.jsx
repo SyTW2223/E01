@@ -29,11 +29,15 @@ const PreviousSession = async() => {
       newSession.objectives.push(realObjective);
       newSession.num_tasks = realObjective.tasks.length
     });
-    previousSession.push(newSession)
+    previousSession.push(newSession);
   });
   console.log(previousSession)
+
   return (
-    <div>PreviousSession</div>
+    // {previousSession.map((session) => (
+    //   <p>session</p>
+    // ))}
+    <div></div>
   )
 }
 

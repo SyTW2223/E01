@@ -7,6 +7,7 @@ import { Container } from '@mui/system';
 import SessionFrom from './form/SessionForm';
 import '../App.css';
 import { Link } from "react-router-dom";
+import Navbar from './Navbar'
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -21,6 +22,7 @@ const Home = () => {
 
   return (
     <ThemeProvider theme={theme}>
+        <Navbar/>
         <Container component = 'main' maxWidth='false'
         >
         <Typography component='h1' variant="h3" align='center' 
