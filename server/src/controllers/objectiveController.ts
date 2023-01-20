@@ -69,6 +69,14 @@ export const getObjective = async (req: any, res: any) => {
   });
 }
 
+export const getObjectiveById = async (req: any, res: any) => {
+  Objective.findById(req.query.id).then((objective) => {
+      res.status(200).send(objective);
+  }).catch(() => {
+    res.status(404).send();
+  });
+}
+
 /**
  * @method deleteObjective is a function used to delete a specific objective and all of its associated tasks from the application.
  * 
