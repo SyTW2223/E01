@@ -33,15 +33,16 @@ const Login = () => {
           })
         };
         const result = await (await fetch(`http://localhost:4000/user/login`, options));
-        const token = await result.json();
-        if (result.status === 200) {
+        const status = result.status;
+        if (status === 200) {
+          const token = await result.json();
           dispatch(login({
             userName: userName,
             userPwd: userPwd,
             token: token.token,
             loggedIn: true,
           }));
-        } else if (result.status === 500) {
+        } else if (result.status === 404) {
           throw new Error("No existe el usuario, registrese primero.");
         } else {
           throw new Error("Error desconocido.");
