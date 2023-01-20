@@ -26,14 +26,17 @@ const PreviousSession = () => {
         const realSession = await getSession.json()
         // Obtnemos la sesion y ponemos el nombre
         newSession.name = realSession.name
-        realSession.objectives.forEach(async (el) => {
+        const objectives = await Promise.all(realSession.objectives.map(async (el) => {
           url = `http://localhost:4000/objective/id/?token=${token}&id=${el}`;
           const getObjective = await fetch(url)
-          const realObjective = await getObjective.json()
-          // Obetenemos el objetibo real y lo asignamos así como el numero de tareas
+          return await getObjective.json();
+        }));
+        
+        objectives.forEach((realObjective) => {
           newSession.objectives.push(realObjective.name);
           newSession.num_tasks = realObjective.tasks.length
         });
+        
         return newSession;
       });
       setPreviousSession(await Promise.all(sessions));
@@ -53,6 +56,7 @@ const PreviousSession = () => {
               <p key={index}> Hola {a}</p>
             ))}
             <p>Tareas: {session.num_tasks}</p>
+            
           </div>
         ))
       }
