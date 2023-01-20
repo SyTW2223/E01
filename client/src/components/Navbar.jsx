@@ -45,27 +45,27 @@ const Navbar = () => {
     <AppBar position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          {/* <Link to='/register' variant="body2">
-            <Button>
-            </Button>
-          </Link> */}
-          <Typography
-            variant="h6"
-            noWrap
-            component="a"
-            href='/home'
-            sx={{
-              mr: 2,
-              display: { xs: 'none', md: 'flex' },
-              fontFamily: 'monospace',
-              fontWeight: 700,
-              letterSpacing: '.3rem',
-              color: 'inherit',
-              textDecoration: 'none',
-            }}
-          >
-            DAILY PLANNER
-          </Typography>
+          <Button variant='text'>
+            <Link to='/' variant="body2">
+              <Typography
+                variant="h6"
+                noWrap
+                component="a"
+                style={{ textDecoration: 'none', color: '#ffffff' }}
+                sx={{
+                  mr: 2,
+                  display: { xs: 'none', md: 'flex' },
+                  fontFamily: 'monospace',
+                  fontWeight: 700,
+                  letterSpacing: '.3rem',
+                  color: 'inherit',
+                  textDecoration: 'none',
+                }}
+              >
+                DAILY PLANNER
+              </Typography>
+            </Link>
+          </Button>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             <Button
               variant="text"
