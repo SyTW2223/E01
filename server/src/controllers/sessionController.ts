@@ -72,6 +72,14 @@ export const getSession = async (req: any, res: any) => {
     res.status(500).send();
   });
 }
+
+export const getSessionById = async (req: any, res: any) => {
+  Session.findById(req.query.id).then((session) => {
+      res.status(200).send(session);
+  }).catch(() => {
+    res.status(404).send();
+  });
+}
 /**
  * @method deleteSession is a function used to delete a specific session and all of its associated objectives and tasks from the application.
  * 
