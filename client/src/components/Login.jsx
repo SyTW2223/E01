@@ -100,13 +100,14 @@ const Login = () => {
               type="submit"
               fullWidth
               variant="contained"
-              sx={{ mt: 3, 
-                    mb: 2, 
-                    bgcolor: 'primary.main',
-                    '&:hover': {
-                      backgroundColor: 'secondary.secondary',
-                    }
-              }}              
+              sx={{
+                mt: 3,
+                mb: 2,
+                bgcolor: 'primary.main',
+                '&:hover': {
+                  backgroundColor: 'secondary.secondary',
+                }
+              }}
             >
               Sign In
             </Button>
