@@ -7,7 +7,7 @@ import { TextField,
          } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import TaskForm from './TaskForm';
-import { theme } from '../theme';
+import { theme } from '../../themes/mainTheme';
 import DoneAllIcon from '@mui/icons-material/DoneAll';
 
 const ObjectiveForm = ({ objective, objectiveIndex, handleTaskChange, handleDeleteTask, handleObjectiveChange, handleAddTask,
@@ -42,7 +42,7 @@ const ObjectiveForm = ({ objective, objectiveIndex, handleTaskChange, handleDele
           borderColor: 'secondary.main',
         }}
       />
-      {!objective.completed && <Button onClick={() => handleAddTask(objectiveIndex)}
+      {!objective.completed && <Button onClick={() => handleAddTask(objectiveIndex)} data-testid="add-task-btn"
         sx={{
           bgcolor: 'primary.main',
           color: 'secondary.secondary',
@@ -55,13 +55,14 @@ const ObjectiveForm = ({ objective, objectiveIndex, handleTaskChange, handleDele
        </Button>}
       <Button onClick={() => handleCompleteObjective(objectiveIndex)} disabled={objective.completed} sx={{maxWidth: '1px'}}>
         <DoneAllIcon
-        sx={{
-          borderRadius: 1,
-          color: 'primary.main',
-          marginX: 2
-        }}/>
+          data-testid="complete-objective-btn"
+          sx={{
+            borderRadius: 1,
+            color: 'primary.main',
+            marginX: 2
+          }}/>
       </Button>
-      <IconButton onClick={() => handleDeleteObjective(objectiveIndex)}> <DeleteIcon 
+      <IconButton onClick={() => handleDeleteObjective(objectiveIndex)} data-testid="delete-objective-btn"> <DeleteIcon 
           sx={{
             color: 'primary.main',
           }}

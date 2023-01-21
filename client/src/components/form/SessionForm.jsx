@@ -1,25 +1,26 @@
 import React, { useState } from 'react';
 import { TextField,
          Button,
+         Box,
          Container,
          Alert, 
          ThemeProvider} from '@mui/material';
 import ObjectiveForm from './ObjectiveForm';
 import { useDispatch } from 'react-redux';
 import DoneAllIcon from '@mui/icons-material/DoneAll';
-import { theme } from '../theme';
+import { theme } from '../../themes/mainTheme';
 import { useSelector } from 'react-redux';
 import { selectUser } from '../../features/userSlice';
 
-const SessionFrom = () => {
+const SessionForm = () => {
   const [session, setSession] = useState('');
   const [objectives, setObjectives] = useState([]);
   const [openAlert, setAlert] = useState(false);
   const [openSuccess, setSuccess] = useState(false);
 
   const user = useSelector(selectUser);
-  const username = user.userName;
-  const token = user.token;
+  const username = user && user.userName;
+  const token = user && user.token;
 
   const dispatch = useDispatch();
 
@@ -156,6 +157,7 @@ const SessionFrom = () => {
         {openSuccess && <Alert severity="success" onClose={() => setSuccess(false)}>¡Todo ha ido perfecto!</Alert>}
         {/* Session form */}
         <TextField
+          data-testid="add-session-input"
           required
           variant='filled'
           label="Session Name"
@@ -169,13 +171,15 @@ const SessionFrom = () => {
             
           }}
         />
-        <Button onClick={handleAddObjective} sx={{bgcolor: 'primary.secondary', marginTop: 1, marginBottom: 1,
+        <Button onClick={handleAddObjective} data-testid="add-session-btn"
+                sx={{bgcolor: 'primary.secondary', marginTop: 1, marginBottom: 1,
           '&:hover': {
             color: 'secondary.secondary',
           }}}
         >
           Add</Button>
-        <Button 
+        <Button
+          data-testid="complete-session-btn" 
           sx={{
             borderRadius: 5,
             bgcolor: 'primary.secondary',
@@ -195,22 +199,24 @@ const SessionFrom = () => {
         </Button>
         
         {/* Objetive Form */}
-        {objectives.map((objective, index) => (
-          <ObjectiveForm 
-            objective={objective}
-            objectiveIndex={index} 
-            handleTaskChange={handleTaskChange}
-            handleDeleteTask={handleDeleteTask}
-            handleObjectiveChange={handleObjectiveChange}
-            handleAddTask={handleAddTask}
-            handleCompleteObjective={handleCompleteObjective}
-            handleDeleteObjective={handleDeleteObjective}
-          />
-        ))}
+        <Box data-testid="objectives-form">
+            {objectives.map((objective, index) => (
+             <ObjectiveForm 
+              objective={objective}
+              objectiveIndex={index} 
+              handleTaskChange={handleTaskChange}
+              handleDeleteTask={handleDeleteTask}
+              handleObjectiveChange={handleObjectiveChange}
+              handleAddTask={handleAddTask}
+              handleCompleteObjective={handleCompleteObjective}
+              handleDeleteObjective={handleDeleteObjective}
+            />
+            ))}
+        </Box>
 
       </Container>
     </ThemeProvider>
   );
 }
 
-export default SessionFrom;
+export default SessionForm;

@@ -1,0 +1,5 @@
+{
+  "devDependencies": {
+    "jest-css-modules": "^2.1.0"
+  }
+}

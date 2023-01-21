@@ -1,20 +1,17 @@
+import React from 'react';
 import { Typography, Box } from '@mui/material';
 import { ThemeProvider } from '@mui/material';
-import {theme} from './theme'
+import { theme } from '../themes/mainTheme';
 import { Container } from '@mui/system';
-import SessionFrom from './form/SessionForm';
-import '../App.css';
-import Navbar from './Navbar'
+import SessionForm from './form/SessionForm';
+import Navbar from './Navbar';
 
 const Home = () => {
-  
-
   return (
     <ThemeProvider theme={theme}>
         <Navbar/>
-        <Container component = 'main' maxWidth='false'
-        >
-        <Typography component='h1' variant="h3" align='center' 
+        <Container component = 'main' maxWidth='false'>
+        <Typography component='h1' variant="h3" align='center' data-testid="home-typography"
           sx={{
             paddingTop: 8, 
             fontFamily: 'monospace',
@@ -24,13 +21,13 @@ const Home = () => {
             ¡ Inicia una nueva sesión de estudio !
         </Typography>
         
-          <Box sx= {{
+          <Box data-testid="home-form" sx= {{
             marginTop: 8,
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center'
           }}>
-            <SessionFrom/>
+            <SessionForm/>
           </Box>
         </Container>
     </ThemeProvider>

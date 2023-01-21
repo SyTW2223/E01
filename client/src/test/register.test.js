@@ -17,25 +17,24 @@ describe('Register component Tests', () => {
   });
   
   describe('Rendering test for Register component', () => {
-    it ('Should render', () => {
-      expect(screen.getByText(/sign in/i)).toBeInTheDocument();
-    });
-    
-    it ('Should have a button', () => {
-      expect(screen.getByRole('button'));
+    it ('Sign up Button', () => {
+      expect(screen.getByTestId('sign-up-button')).toBeInTheDocument();
     });
 
-    it ('Should have link to login', () => {
-      expect(screen.findByRole('link'));
+    it ('Sign up username input', () => {
+      expect(screen.getByTestId('sign-up-username')).toBeInTheDocument();
     });
 
-    it ('Should have a form', () => {
-      expect(screen.findByRole('form'));
+    it ('Sign up pwd input', () => {
+      expect(screen.getByTestId('sign-up-pwd')).toBeInTheDocument();
     });
 
-    it ('Should have inputs where give information for the Register', () => {
-      expect(screen.findByRole('input'));
+    it ('Sign In link', () => {
+      expect(screen.getByTestId('sign-in-link')).toBeInTheDocument();
+    });
+
+    it ('Sign Up Typography', () => {
+      expect(screen.getByTestId('sign-up-typography')).toBeInTheDocument();
     });
   });
 });
-

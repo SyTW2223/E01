@@ -1,4 +1,9 @@
 module.exports = {
   "testEnvironment": "jsdom",
-  "resetMocks": false
+  "resetMocks": false,
+  setupFilesAfterEnv: [
+    'jest-fetch-mock'
+  ],
+
 }
+

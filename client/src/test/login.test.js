@@ -1,4 +1,4 @@
-import { afterEach, beforeEach, expect, it } from '@jest/globals';
+import { afterEach, beforeEach, expect } from '@jest/globals';
 import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import Login from "../components/Login";
@@ -17,25 +17,24 @@ describe('Login component Tests', () => {
   });
   
   describe('Rendering test for Login component', () => {
-    it ('Should render', () => {
-      expect(screen.getByText(/sign up/i)).toBeInTheDocument();
-    });
-    
-    it ('Should have a button', () => {
-      expect(screen.getByRole('button'));
+    it ('Sign in Button', () => {
+      expect(screen.getByTestId('sign-in-button')).toBeInTheDocument();
     });
 
-    it ('Should have link to register', () => {
-      expect(screen.getByRole('link'));
+    it ('Sign in username input', () => {
+      expect(screen.getByTestId('sign-in-username')).toBeInTheDocument();
     });
 
-    it ('Should have a form', () => {
-      expect(screen.findByRole('form'));
+    it ('Sign in pwd input', () => {
+      expect(screen.getByTestId('sign-in-pwd')).toBeInTheDocument();
     });
 
-    it ('Should have inputs where give information for the login', () => {
-      expect(screen.findByRole('input'));
+    it ('Sign In link', () => {
+      expect(screen.getByTestId('sign-up-link')).toBeInTheDocument();
+    });
+
+    it ('Sign in Typography', () => {
+      expect(screen.getByTestId('sign-in-typography')).toBeInTheDocument();
     });
   });
 });
-

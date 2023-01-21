@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Link } from "react-router-dom";
 import { ThemeProvider } from '@emotion/react';
-import {theme} from './theme'
+import { theme } from '../themes/loginTheme'
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -59,12 +59,13 @@ const Register = () => {
           <Avatar sx={{ m: 1, bgcolor: 'primary.main' }}>
             <LockOutlinedIcon />
           </Avatar>
-          <Typography component="h1" variant="h5" sx={{}}>
+          <Typography component="h1" variant="h5" sx={{}} data-testid="sign-up-typography">
             Sign Up
           </Typography>
           <Box component="form" onSubmit={handleSubmit} noValidate sx={{ m: 1 }}>
             {/* User Name Input */}
             <TextField
+              data-testid="sign-up-username"
               margin="normal"
               required
               fullWidth
@@ -76,6 +77,7 @@ const Register = () => {
             />
             {/* User Password Input */}
             <TextField
+              data-testid="sign-up-pwd"
               margin="normal"
               required
               fullWidth
@@ -87,6 +89,7 @@ const Register = () => {
               onChange={(e) => setRegisterPwd(e.target.value)}
             />
             <Button
+              data-testid="sign-up-button"
               type="submit"
               fullWidth
               variant="contained"
@@ -94,7 +97,7 @@ const Register = () => {
                 mb: 2, 
                 bgcolor: 'primary.main',
                 '&:hover': {
-                  backgroundColor: 'secondary.secondary',
+                  backgroundColor: 'primary.secondary',
                 }
               }}                 
             >
@@ -102,7 +105,7 @@ const Register = () => {
             </Button>
             <Grid container>
               <Grid item>
-                <Link to='/' variant="body2">
+                <Link to='/' variant="body2" data-testid="sign-in-link">
                   {"Vuelve al inicio de sesión"}
                 </Link>
               </Grid>

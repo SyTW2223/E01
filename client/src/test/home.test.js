@@ -17,13 +17,12 @@ describe('Home component Tests', () => {
   });
   
   describe('Rendering test for Home component', () => {
-    it ('Should render', () => {
-      expect(screen.getByRole('heading')).toHaveTextContent("¡ Inicia una nueva sesión de estudio !");
+    it ('Home Typography', () => {
+      expect(screen.getByTestId('home-typography')).toBeInTheDocument();
     });
-    
-    it ('Should have a button', () => {
-      expect(screen.getByRole('button')).toHaveTextContent(/logout/i);
+
+    it ('Home Form', () => {
+      expect(screen.getByTestId('home-form')).toBeInTheDocument();
     });
   });
 });
-

@@ -4,7 +4,7 @@ import { Route, Routes } from 'react-router-dom';
 import PrivateRoute from './components/PrivateRoute';
 import Register from './components/Register';
 import { ThemeProvider } from '@emotion/react';
-import { theme } from './components/theme';
+import { theme } from './themes/mainTheme';
 import PreviousSession from './components/PreviousSession';
 
 export default function App() {

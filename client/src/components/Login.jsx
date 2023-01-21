@@ -4,7 +4,7 @@ import { login } from '../features/userSlice';
 import { useDispatch } from 'react-redux';
 import { Link } from "react-router-dom";
 import { ThemeProvider } from '@emotion/react';
-import { theme } from './theme'
+import { theme } from '../themes/loginTheme'
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -69,12 +69,13 @@ const Login = () => {
           <Avatar sx={{ m: 1, bgcolor: 'primary.main' }}>
             <LockOutlinedIcon />
           </Avatar>
-          <Typography component="h1" variant="h5" sx={{}}>
+          <Typography component="h1" variant="h5" sx={{}} data-testid="sign-in-typography">
             Sign In
           </Typography>
           <Box component="form" onSubmit={handleSubmit} noValidate sx={{ m: 1 }}>
             {/* User name input */}
             <TextField
+              data-testid="sign-in-username"
               margin="normal"
               required
               fullWidth
@@ -86,6 +87,7 @@ const Login = () => {
             />
             {/*  Password input */}
             <TextField
+              data-testid="sign-in-pwd"
               margin="normal"
               required
               fullWidth
@@ -97,6 +99,7 @@ const Login = () => {
               onChange={(e) => setUserPwd(e.target.value)}
             />
             <Button
+              data-testid="sign-in-button"
               type="submit"
               fullWidth
               variant="contained"
@@ -105,7 +108,7 @@ const Login = () => {
                 mb: 2,
                 bgcolor: 'primary.main',
                 '&:hover': {
-                  backgroundColor: 'secondary.secondary',
+                  backgroundColor: 'primary.secondary',
                 }
               }}
             >
@@ -113,7 +116,7 @@ const Login = () => {
             </Button>
             <Grid container>
               <Grid item>
-                <Link to='/register' variant="body2">
+                <Link to='/register' variant="body2" data-testid="sign-up-link">
                   {"¿No tienes cuenta? Regístrate."}
                 </Link>
               </Grid>
