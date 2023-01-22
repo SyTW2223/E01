@@ -16,7 +16,15 @@ const Home = () => {
             paddingTop: 8, 
             fontFamily: 'monospace',
             fontWeight: 700,
-            color: 'primary.main'}}
+            color: 'primary.main',
+            textAlign: "center",
+            "@media (max-width: 600px)": {
+              fontSize: "24px",
+            },
+            "@media (min-width: 600px)": {
+              fontSize: "36px"
+            }
+          }}
           >
             ¡ Inicia una nueva sesión de estudio !
         </Typography>

@@ -35,9 +35,6 @@ const TaskForm = ({ task, taskIndex, objectiveIndex, handleTaskChange, handleDel
             color: 'secondary.main'
           }}
         />
-        <IconButton onClick={() => handleDeleteTask(objectiveIndex, taskIndex)} data-testid="task-delete-btn"> 
-          <DeleteIcon sx={{color: 'primary.main'}}/> 
-        </IconButton>
         <Button onClick={() => setCompletedTask(true)} disabled={taskCompleted} sx={{maxWidth: '1px'}}>
           <DoneAllIcon
           data-testid="task-complete-btn"
@@ -47,6 +44,9 @@ const TaskForm = ({ task, taskIndex, objectiveIndex, handleTaskChange, handleDel
             marginX: 2
           }}/>
         </Button>
+        <IconButton onClick={() => handleDeleteTask(objectiveIndex, taskIndex)} data-testid="task-delete-btn"> 
+          <DeleteIcon sx={{color: 'primary.main'}}/> 
+        </IconButton>
       </ListItem>
     </ThemeProvider>
   );

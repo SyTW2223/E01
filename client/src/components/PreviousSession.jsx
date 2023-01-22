@@ -9,6 +9,7 @@ import Navbar from './Navbar';
 import ClearIcon from '@mui/icons-material/Clear';
 import { useNavigate } from 'react-router-dom';
 
+
 const PreviousSession = () => {
   const [previousSession, setPreviousSession] = useState([]);
   const user = useSelector(selectUser);
@@ -49,7 +50,7 @@ const PreviousSession = () => {
       setPreviousSession(await Promise.all(sessions));
     }
     fetchData();
-  }, [token, username]);
+  }, [token, username, navigate]);
 
   const [filter, setFilter] = useState('');
 
@@ -77,6 +78,7 @@ const PreviousSession = () => {
           <IconButton onClick={() => setFilter("")}><ClearIcon /></IconButton>
         </Box>
         <Container 
+          data-testid='filter-box'
           maxWidth='md'
           sx= {{
             marginTop: 2,
@@ -93,7 +95,7 @@ const PreviousSession = () => {
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center'
-          }}>
+            }}>
           {filteredSessions.length === 0 && filter !== "" 
           ? <Typography sx={{color: 'secondary.secondary'}}>No sessions match the filter</Typography> :
           <List>

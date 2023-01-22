@@ -6,7 +6,7 @@ import { TextField,
          Alert, 
          ThemeProvider} from '@mui/material';
 import ObjectiveForm from './ObjectiveForm';
-import { useDispatch } from 'react-redux';
+// import { useDispatch } from 'react-redux';
 import DoneAllIcon from '@mui/icons-material/DoneAll';
 import { theme } from '../../themes/mainTheme';
 import { useSelector } from 'react-redux';
@@ -22,7 +22,7 @@ const SessionForm = () => {
   const username = user && user.userName;
   const token = user && user.token;
 
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
   const handleAddObjective = () => {
     setObjectives([...objectives, { name: '', tasks: [], completed: false }]);
@@ -202,6 +202,7 @@ const SessionForm = () => {
         <Box data-testid="objectives-form">
             {objectives.map((objective, index) => (
              <ObjectiveForm 
+              key={index}
               objective={objective}
               objectiveIndex={index} 
               handleTaskChange={handleTaskChange}

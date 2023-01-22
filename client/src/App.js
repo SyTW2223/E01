@@ -13,9 +13,9 @@ export default function App() {
     <Routes>
       <Route path='/' element={
               <PrivateRoute>
-                <ThemeProvider theme={theme}>
+                {/* <ThemeProvider theme={theme}> */}
                     <Home />
-                </ThemeProvider>
+                {/* </ThemeProvider> */}
               </PrivateRoute>
             }/>
       <Route path='/login' element={<Login />} />

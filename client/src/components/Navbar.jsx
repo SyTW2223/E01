@@ -35,7 +35,7 @@ const Navbar = () => {
     setAnchorElUser(null);
   };
 
-  const username = " " || user.userName;
+  const username = user && user.userName;
   return (
     <AppBar position="static">
       <Container maxWidth="xl">
@@ -48,7 +48,7 @@ const Navbar = () => {
                 style={{ textDecoration: 'none', color: '#ffffff' }}
                 sx={{
                   mr: 2,
-                  display: { xs: 'none', md: 'flex' },
+                  display: { md: 'flex' },
                   fontFamily: 'monospace',
                   fontWeight: 700,
                   letterSpacing: '.3rem',
@@ -99,8 +99,10 @@ const Navbar = () => {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              <MenuItem data-testid="menu-item-2">
+              <MenuItem data-testid="menu-item-3">
+                <Link to='/' style={{ textDecoration: 'none' }}>
                   <Typography textAlign="center">Bienvenido {username}</Typography>
+                </Link>
               </MenuItem>
 
               <MenuItem onClick={handleCloseUserMenu} data-testid="menu-item-2">
