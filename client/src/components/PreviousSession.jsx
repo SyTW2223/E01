@@ -39,11 +39,12 @@ const PreviousSession = () => {
           const getObjective = await fetch(url)
           return await getObjective.json();
         }));
-        
+        let count = 0
         objectives.forEach((realObjective) => {
           newSession.objectives.push(realObjective.name);
-          newSession.num_tasks = realObjective.tasks.length
+          count += realObjective.tasks.length
         });
+        newSession.num_tasks = count;
         
         return newSession;
       });
