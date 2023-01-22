@@ -26,6 +26,62 @@ afterAll(async () => {
   await mongoose.connection.close();
 });
 
+
+describe('Delete internal server error`s endpoint', () => {
+  test('Should delete a task', async () => {
+    await api
+      .delete('/task')
+      .send({ token: token })
+      .query({ name: "no existo", objective: "no existo" })
+      .expect(500)
+  });
+  test('Should delete a objective', async () => {
+    await api
+      .delete('/objective')
+      .send({ token: token })
+      .query({ name: "no existo", session: "no existo" })
+      .expect(500)
+  });
+  test('Should delete a session', async () => {
+    await api
+      .delete('/session')
+      .send({ token: token })
+      .query({ name: "no existo", user: "no existo" })
+      .expect(500)
+  });
+});
+
+describe('Delete bad`s endpoint', () => {
+  test('Should delete a task', async () => {
+    await api
+      .delete('/task')
+      .send({ token: token })
+      .query({ name: "no existo", objective: newTask.objective.toString() })
+      .expect(404)
+  });
+  test('Should delete a objective', async () => {
+    await api
+      .delete('/objective')
+      .send({ token: token })
+      .query({ name: "no existo", session: newObjective.session.toString() })
+      .expect(404)
+  });
+  test('Should delete a session', async () => {
+    await api
+      .delete('/session')
+      .send({ token: token })
+      .query({ name: "no existo", user: newSession.user.toString() })
+      .expect(404)
+  });
+  test('Should delete a user', async () => {
+    await api
+      .delete('/user')
+      .send({ token: token })
+      .query({ name: "no existo" })
+      .expect(404)
+  });
+});
+
 describe('Delete`s endpoint', () => {
   test('Should delete a task', async () => {
     await api
@@ -56,3 +112,5 @@ describe('Delete`s endpoint', () => {
       .expect(200)
   });
 });
+
+

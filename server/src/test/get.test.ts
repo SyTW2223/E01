@@ -24,7 +24,7 @@ afterAll(async () => {
 
 describe('Get`s endpoint', () => {
   test('Should get a user', async () => {
-    const res = await api.get('/user').query({token: token, name: newUser.name });
+    const res = await api.get('/user').query({ token: token, name: newUser.name });
     expect(res.status).toBe(200);
   });
   test('Should get a session', async () => {
@@ -44,6 +44,44 @@ describe('Get`s endpoint', () => {
       .send({ token: token })
       .query({ name: newTask.name, objective: newTask.objective.toString() })
       .expect(200)
+  });
+
+  test('Should try to get a user', async () => {
+    const res = await api.get('/user').query({ token: token, name: "no existo" });
+    expect(res.status).toBe(404);
+  });
+  test('Should try to get a session', async () => {
+    const session = await api.get('/session').send({ token: token }).query({ name: "no existo", user: newSession.user.toString() })
+    expect(session.status).toBe(404);
+
+  });
+  test('Should try to get a objective', async () => {
+    const objective = await api.get('/objective').send({ token: token }).query({ name: "no existo", session: newObjective.session.toString() })
+    expect(objective.status).toBe(404)
+  });
+  test('Should try toget a task', async () => {
+    await api
+      .get('/task')
+      .send({ token: token })
+      .query({ name: "no existo", objective: newTask.objective.toString() })
+      .expect(404)
+  });
+  // Internal server
+  test('Should try to get a session', async () => {
+    const session = await api.get('/session').send({ token: token }).query({ name: "no existo", user: "no existo" })
+    expect(session.status).toBe(500);
+
+  });
+  test('Should try to get a objective', async () => {
+    const objective = await api.get('/objective').send({ token: token }).query({ name: "no existo", session: "no existo" })
+    expect(objective.status).toBe(500)
+  });
+  test('Should try to get a task', async () => {
+    await api
+      .get('/task')
+      .send({ token: token })
+      .query({ name: "no existo", objective:"no existo" })
+      .expect(500)
   });
 });
 
