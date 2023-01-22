@@ -9,11 +9,10 @@ import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
-import { Link, Navigate  } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useDispatch } from 'react-redux';
 import { Menu } from '@mui/material';
 import { logout } from '../features/userSlice';
-import { useEffect } from 'react';
 import { selectUser } from '../features/userSlice';
 import { useSelector } from 'react-redux';
 
@@ -36,39 +35,41 @@ const Navbar = () => {
     setAnchorElUser(null);
   };
 
+  const username = " " || user.userName;
   return (
     <AppBar position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <Button variant='text' >
-                  <Link to='/' variant="body2" style={{ textDecoration: 'none', color: '#ffffff' }} data-testid="title-btn">
-                    <Typography
-                      variant="h6"
-                      noWrap
-                      style={{ textDecoration: 'none', color: '#ffffff' }}
-                      sx={{
-                        mr: 2,
-                        display: { xs: 'none', md: 'flex' },
-                        fontFamily: 'monospace',
-                        fontWeight: 700,
-                        letterSpacing: '.3rem',
-                        color: 'inherit',
-                        textDecoration: 'none',
-                      }}
-                    >
-                      DAILY PLANNER
-                    </Typography>
-                  </Link>
+            <Link to='/' variant="body2" style={{ textDecoration: 'none', color: '#ffffff' }} data-testid="title-btn">
+              <Typography
+                variant="h6"
+                noWrap
+                style={{ textDecoration: 'none', color: '#ffffff' }}
+                sx={{
+                  mr: 2,
+                  display: { xs: 'none', md: 'flex' },
+                  fontFamily: 'monospace',
+                  fontWeight: 700,
+                  letterSpacing: '.3rem',
+                  color: 'inherit',
+                  textDecoration: 'none',
+                }}
+              >
+                DAILY PLANNER
+              </Typography>
+            </Link>
           </Button>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             <Button
               variant="text"
-              sx={{ mt: 2, 
-                    mb: 2,
-                    mr: 2,
-                    ml: 'auto',
-                    border: 'none',
-              }}              
+              sx={{
+                mt: 2,
+                mb: 2,
+                mr: 2,
+                ml: 'auto',
+                border: 'none',
+              }}
             >
               <Link to='/previous' style={{ textDecoration: 'none', color: '#ffffff' }} data-testid="psessions-btn">
                 {"Previous sessions"}
@@ -77,8 +78,8 @@ const Navbar = () => {
           </Box>
           <Box sx={{ flexGrow: 0, display: 'flex', ml: 'auto' }}>
             <Tooltip title="Open settings">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0, color: '#ffffff'}} data-testid="account-btn">
-                <AccountCircleRoundedIcon sx={{fontSize: '1.5em'}} data-testid="account-icon"/>
+              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0, color: '#ffffff' }} data-testid="account-btn">
+                <AccountCircleRoundedIcon sx={{ fontSize: '1.5em' }} data-testid="account-icon" />
               </IconButton>
             </Tooltip>
             <Menu
@@ -98,8 +99,8 @@ const Navbar = () => {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              <MenuItem data-testid="menu-item-1">
-                  <Typography textAlign="center" onClick={handleLogout}>Logout</Typography>
+              <MenuItem data-testid="menu-item-2">
+                  <Typography textAlign="center">Bienvenido {username}</Typography>
               </MenuItem>
 
               <MenuItem onClick={handleCloseUserMenu} data-testid="menu-item-2">
@@ -107,6 +108,13 @@ const Navbar = () => {
                   <Typography textAlign="center">Previous sessions</Typography>
                 </Link>
               </MenuItem>
+
+              <MenuItem data-testid="menu-item-1">
+                <Link to='/'>
+                  <Typography textAlign="center" onClick={handleLogout}>Logout</Typography>
+                </Link>
+              </MenuItem>
+              
             </Menu>
           </Box>
         </Toolbar>

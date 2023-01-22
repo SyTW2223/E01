@@ -3,8 +3,10 @@ import { createSlice } from '@reduxjs/toolkit';
 export const userSlice = createSlice ({
   name: "user",
   token: "token",
+  loggedIn: false,
   initialState: {
     user: null,
+    loggedIn: false,
     token: null
   },
   reducers:{
@@ -18,6 +20,7 @@ export const userSlice = createSlice ({
     logout: (state) => {
       state.user = null;
       state.loggedIn = false;
+      state.token = null;
     }
   }
 });

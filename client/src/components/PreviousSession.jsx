@@ -7,15 +7,18 @@ import { theme } from '../themes/mainTheme';
 import { Container } from '@mui/system';
 import Navbar from './Navbar';
 import ClearIcon from '@mui/icons-material/Clear';
+import { useNavigate } from 'react-router-dom';
 
 const PreviousSession = () => {
   const [previousSession, setPreviousSession] = useState([]);
   const user = useSelector(selectUser);
   const username = user && user.userName;
   const token = user && user.token;
+  const navigate = useNavigate()
   
   useEffect(() => {
     async function fetchData() {
+      if (username === null) return navigate("/")
       let url = `http://localhost:4000/user/?token=${token}&name=${username}`;
       let realUser = await fetch(url);
       realUser = await realUser.json();
@@ -147,8 +150,8 @@ const PreviousSession = () => {
                     }}>
                     Objetivos completados:
                   </Typography>
-                  {session.objectives.map((objective) => (
-                    <Box sx={{m: '4px', bgcolor: 'secondary.main', borderRadius: 3, 
+                  {session.objectives.map((objective, index) => (
+                    <Box key={index} sx={{m: '4px', bgcolor: 'secondary.main', borderRadius: 3, 
                     width: '100%',
                     "@media screen and (min-width: 600px)": {
                         width: "90%"
